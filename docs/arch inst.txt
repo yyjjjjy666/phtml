@@ -1,0 +1,94 @@
+cfdisk
+	EFI SYSTEM - 1G
+	LINUX SWAP - same as ram G (16GB RAM = 16G)
+	LINUX FILE SYSTEM - root - at least 40G
+	LINUX FILE SYSTEM - home - free space
+lsblk to check disks
+
+mkfs.vfat /dev/sda1
+mkswap /dev/sda2
+mkfs.ext4 /dev/sda3
+mkfs.ext4 /dev/sda4
+
+mount /dev/sda3 /mnt
+swapon /dev/sda2
+mkdir /mnt/home
+mkdir /mnt/efi
+mount /dev/sda4 /mnt/home
+mount /dev/sda1 /mnt/efi
+lsblk
+
+nano /etc/pacman.d/mirrorlist
+	Server = https://mirror.cspacehostings.com/archlinux/$repo/os/$arch
+	Server = https://repo.br.ee/arch/$repo/os/$arch
+	Server = https://mirrors.xtom.ee/archlinux/$repo/os/$arch
+pacman -Syy
+
+pacstrap -K /mnt base base-devel linux linux-firmware sof-firmware neofetch nano efibootmgr dhcpcd wpa_supplicant grub sudo iwctl
+
+genfstab -U /mnt >> /mnt/etc/fstab
+arch-chroot /mnt
+grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
+grub-mkconfig -o /boot/grub/grub.cfg
+
+nano /etc/locale.gen
+locale-gen
+
+nano /etc/locale.conf
+	LANG=en_US.UTF-8
+
+nano /etc/hostname
+
+passwd (ch root pass)
+
+exit
+
+shutdown now
+
+
+systemctl enable dhcpcd
+systemctl start dhcpcd
+
+useradd -m main
+passwd main
+
+nano /etc/sudoers
+
+GRAPHICS & DE --- https://www.debugpoint.com/wayland-arch-linux/
+
+git clone https://aur.archlinux.org/yay-bin.git
+cd yay-bin
+makepkg -i
+
+sudo pacman -S --needed wayland
+yay -S sddm-git
+
+sudo pacman -S --needed xorg-xwayland xorg-xlsclients qt5-wayland glfw-wayland
+sudo pacman -S --needed plasma-wayland-session
+
+yay -S brave-bin
+sudo systemctl enable sddm
+
+sudo nano /usr/lib/sddm/sddm.conf.d/default.conf
+	[Theme]
+	# current theme name
+	Current=breeze
+	
+reboot
+
+sudo nano /etc/pacman.conf
+	multilib
+
+sudo pacman -S intel-ucode
+sudo nano /etc/default/grub
+	GRUB_TIMEOUT_STYLE=hidden
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+reboot
+
+sudo pacman -S unzip ufw p7zip thunderbird krita vlc libreoffice linux-lts linux-lts-headers
+
+yay -S preload
+sudo systemctl enable preload
+sudo systemctl start preload
+
+simple terminal

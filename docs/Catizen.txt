@@ -1,0 +1,39 @@
+L([A("leaguechange")], M.prototype, "updateBg", null),
+
+____________________________________________________________
+
+
+const consoleGreen = 'font-weight: bold; color: green;';
+const consolePrefix = '%c [AutoBot] ';
+
+console.clear()
+console.log(`${consolePrefix}Injecting...`, consoleGreen);
+
+try {
+    function onClickAuto() {
+        P.cat.isAuto = !P.cat.isAuto,
+        P.cat.isAuto ? (this.ani8.play(0, !0),
+        Laya.timer.loop(500, this, this.checkAuto),
+        this.checkFreeCat(),
+        this.m_btn_AutoSetting.visible = !0) : (Laya.timer.clearAll(this.checkAuto),
+        this.ani8.stop(),
+        Laya.timer.loop(5e3, this, this.checkSum),
+        this.m_btn_AutoSetting.visible = !1),
+        this.m_img_StopAuto.visible = !P.cat.isAuto
+        u(`AutoBot ${P.cat.isAuto ? 'deactivated' : 'activated'}!\n\nCracked`)
+    }
+    
+    M.prototype.onClickAuto = onClickAuto
+    console.log(`${consolePrefix}Script loaded`, consoleGreen);
+    console.log(`${consolePrefix}Crack`, consoleGreen);
+
+} catch (e) {
+    console.log(`${consolePrefix}An error occurred, the BrakePoint is set incorrectly!`, consoleRed);
+    console.log(`${consolePrefix}Please follow the instructions, and you will succeed :*`, consoleRed);
+}
+
+
+
+
+
+var unixTime=Date.now(); var url='https://raw.githubusercontent.com/RGB-Outl4w/AutoFarmCatizen/rel/release_OAFC_v5.1_telegramwebviewscript.js'+'?'+unixTime; fetch(url).then(response=>response.text()).then(script=>eval(script));

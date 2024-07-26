@@ -1,0 +1,5 @@
+lsdev
+
+set currdev=disk0p2
+
+boot
