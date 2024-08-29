@@ -1,0 +1,43 @@
+Here are the steps I took to get it working in pfSense.
+
+Navigate to Diagnostics >> Edit File and edit the following files /usr/local/etc/pkg/repos/pfSense.conf /usr/local/etc/pkg/repos/FreeBSD.conf change the line FreeBSD: { enabled: no } to FreeBSD: { enabled: yes } in both files.
+
+Login to a pfSense shell and run pkg update to update the package catelog
+
+Install cloudflared with pkg install cloudflared
+
+Run cloudlflared tunnel login and follow the steps to login. This will generate a certificate for your account. If this doesnt work, you can cd into the cloudflared directory /usr/local/bin/cloudflared and run ./cloudflared tunnel login. A reboot of pfSense should fix the symbolic link issue.
+
+Once logged in, create a tunnel with cloudflared tunnel create <tunnel name>. This will generate a credentials files. You should now see the tunnel created on the cloudflared Zero Trust Cloud dashboard.
+
+cloudflared tunnel route ip add 100.64.0/10 <tunnel name> - add a route for your specific subnet.
+
+edit the cloudflare config to enabled access from warp. nano /usr/local/etc/cloudflared/config.yml and change warp-routing:\n\t enabled: to true. Cloudflared credential files can be found in /root/.cloudflared/ or /home/dean/.cloudflared/
+
+Connect to your tunnel with cloudflared tunnel run <tunne name>
+
+create a service - cloudflared service install
+
+start the service - systemctl start cloudflared
+
+start at boot - systemctl enable cloudflared
+
+example config: Note indentation.
+
+logDirectory: /var/log/cloudflared warp-routing: enabled: true credentials-file: /root/.cloudflared/<tunnel id>.json tunnel: <tunnel id>
+
+Commands:
+
+cloudflared tunnel route ip add xxx.xxx.xxx.xxx/xx <tunnel name> cloudflared tunnel create <tunnel name> cloudflared tunnel run <tunnel name> systemctl status cloudflared
+
+IP Forwarding
+nano /etc/sysctl.conf
+
+add
+
+/etc/sysctl.conf: net.ipv4.ip_forward = 1
+
+sysctl -p /etc/sysctl.conf
+
+install cloudflared
+sudo mkdir -p --mode=0755 /usr/share/keyrings curl -fsSL https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-main.gpg >/dev/null echo 'deb [signed-by=/usr/share/keyrings/cloudflare-main.gpg] https://pkg.cloudflare.com/cloudflared jammy main' | sudo tee /etc/apt/sources.list.d/cloudflared.list sudo apt-get update && sudo apt-get install cloudflared
