@@ -1,0 +1,14 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+*.lnk
+
+# OneDrive sync temp files
+~$*
+*.tmp
+
+# Editors
+.vscode/
+*.swp
+*.swo

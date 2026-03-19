@@ -4,34 +4,78 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Static HTML personal website hosted on GitHub Pages at `geller.ee`. No build process, no package manager, no framework — pure HTML/CSS with an empty `js/` directory.
+Static HTML personal website hosted on GitHub Pages at `geller.ee`. No build process, no package manager, no framework — pure HTML/CSS/vanilla JS.
 
 ## Architecture
 
-Four HTML pages sharing one stylesheet:
+### Directory structure
 
-- [index.html](index.html) — main page (currently shows a todo list)
-- [docs.html](docs.html) — index of documentation files in `docs/`
-- [links.html](links.html) — curated links (software, services, AI tools, study resources)
-- [contact.html](contact.html) — contact page
-- [css/styles.css](css/styles.css) — single shared stylesheet for all pages
+```
+phtml/
+├── index.html              ← geller.ee/
+├── docs/index.html         ← geller.ee/docs
+├── links/index.html        ← geller.ee/links
+├── gallery/index.html      ← geller.ee/gallery
+├── contact/index.html      ← geller.ee/contact
+├── tools/
+│   ├── index.html          ← geller.ee/tools  (hub listing all tools)
+│   └── wheel/index.html    ← geller.ee/tools/wheel
+├── css/styles.css          ← single shared stylesheet
+├── js/
+│   ├── visitor-info.js     ← footer IP fetch (shared, all pages)
+│   ├── gallery.js          ← lightbox logic
+│   └── wheel.js            ← fortune wheel logic
+├── files/                  ← personal guide files (.txt, .pdf) — NOT the docs page
+├── images/                 ← gallery images
+└── data/                   ← misc data files (JSON etc.)
+```
+
+### Clean URLs
+
+Pages use `folder/index.html` so GitHub Pages serves them at `geller.ee/page` without `.html`. This is the only way to achieve clean URLs on GitHub Pages without server config.
+
+### Root-relative paths
+
+All internal `href` and `src` attributes use root-relative paths starting with `/`:
+- `/css/styles.css` — not `css/styles.css` or `../../css/styles.css`
+- `/js/visitor-info.js`
+- `/docs`, `/links`, `/gallery`, `/tools`, `/tools/wheel`
+
+This works from any subfolder depth. **Note:** root-relative paths break with `file://` — always use `python -m http.server 8080` for local testing.
 
 ### Navigation pattern
 
-Every page has the same `<nav class="navbar">` with four links. The current page gets `class="active"`, all others get `class="non-active"`. Update all four pages when adding a new nav item.
+Every page has the same `<nav class="navbar">`. The current page gets `class="active"`, all others `class="non-active"`. The tools nav item uses a CSS-only hover dropdown:
 
-### Design system (from styles.css)
+```html
+<li class="dropdown">
+    <a href="/tools" class="non-active">tools</a>
+    <ul class="dropdown-menu">
+        <li><a href="/tools/wheel">wheel</a></li>
+    </ul>
+</li>
+```
 
-- Background: `#2C2C2C`, text: `#E0E0E0`, accent/active: `#e0ff03` (yellow-green)
+On mobile (≤600px) the dropdown is hidden; tapping "tools" goes to the hub. **When adding a new tool:** create `tools/<name>/index.html`, add a `<li>` to the dropdown on every page, and add a listing on `tools/index.html`.
+
+### Design system (from `css/styles.css`)
+
+- Background: `#2C2C2C`, text: `#E0E0E0`, accent: `#e0ff03`
 - Font: `'Courier New', monospace`, 18px base
-- Links use `class="links"` wrapper for yellow styling; nav uses `.active`/`.non-active` classes
-- All link text is lowercase (`text-transform: lowercase`)
+- Nav: `.active` = yellow bg + black text; `.non-active` = light text
+- Links: wrap in `<div class="links">` for yellow styling
+- All link/nav text is lowercase (`text-transform: lowercase`)
 
-## Known issues
+### Footer
 
-- [index.html:26](index.html#L26) has a broken `<script src="js/*.js">` — wildcard globs don't work in script src attributes. Remove or replace with actual filenames when adding JS.
-- `js/` and `images/` directories are empty.
+Every page has `<footer id="visitor-footer">` with three spans (`visitor-ip`, `visitor-location`, `visitor-org`) populated by `/js/visitor-info.js` via `ipapi.co`. Results cached in `sessionStorage` under `visitorInfo`.
 
 ## Development
 
-No build step. Edit HTML/CSS directly and open in a browser. Deploy by pushing to the `main` branch (GitHub Pages serves it automatically via the `CNAME` pointing to `geller.ee`).
+Serve locally: `python -m http.server 8080` then open `http://localhost:8080`.
+
+Deploy: push to `main` branch — GitHub Pages serves automatically via `CNAME` → `geller.ee`.
+
+## Known issues
+
+- `gallery/index.html` references `/images/example.jpg` as a placeholder — replace with real images.

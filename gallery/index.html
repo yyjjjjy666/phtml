@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>main page</title>
+    <title>gallery</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <header>
         <nav class="navbar">
             <ul>
-                <li><a href="/" class="active">main page</a></li>
+                <li><a href="/" class="non-active">main page</a></li>
                 <li><a href="/docs" class="non-active">docs</a></li>
                 <li><a href="/links" class="non-active">links</a></li>
-                <li><a href="/gallery" class="non-active">gallery</a></li>
+                <li><a href="/gallery" class="active">gallery</a></li>
                 <li class="dropdown">
                     <a href="/tools" class="non-active">tools</a>
                     <ul class="dropdown-menu">
@@ -25,16 +25,28 @@
         </nav>
     </header>
     <main>
-        <h2>todo</h2>
-        <p>
-            hidden wish list, archive, hover links
-        </p>
+        <!-- To add images: copy a .gallery-item block and set the src to /images/yourfile.jpg -->
+        <!-- To add a new category: copy a <section> block and change the <h2> heading -->
+        <section>
+            <h2>uncategorized</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="/images/example.jpg" alt="example" onclick="openLightbox(this.src)">
+                </div>
+            </div>
+        </section>
     </main>
+
+    <div id="lightbox">
+        <img id="lightbox-img" src="" alt="full size">
+    </div>
+
     <footer id="visitor-footer">
         <span id="visitor-ip"></span>
         <span id="visitor-location"></span>
         <span id="visitor-org"></span>
     </footer>
+    <script src="/js/gallery.js"></script>
     <script src="/js/visitor-info.js"></script>
 </body>
 </html>

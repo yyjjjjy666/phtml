@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>main page</title>
+    <title>tools</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <header>
         <nav class="navbar">
             <ul>
-                <li><a href="/" class="active">main page</a></li>
+                <li><a href="/" class="non-active">main page</a></li>
                 <li><a href="/docs" class="non-active">docs</a></li>
                 <li><a href="/links" class="non-active">links</a></li>
                 <li><a href="/gallery" class="non-active">gallery</a></li>
                 <li class="dropdown">
-                    <a href="/tools" class="non-active">tools</a>
+                    <a href="/tools" class="active">tools</a>
                     <ul class="dropdown-menu">
                         <li><a href="/tools/wheel">wheel</a></li>
                     </ul>
@@ -25,10 +25,12 @@
         </nav>
     </header>
     <main>
-        <h2>todo</h2>
-        <p>
-            hidden wish list, archive, hover links
-        </p>
+        <h2>tools</h2>
+        <div class="links">
+            <ul>
+                <li><a href="/tools/wheel">wheel</a> — spin a custom fortune wheel</li>
+            </ul>
+        </div>
     </main>
     <footer id="visitor-footer">
         <span id="visitor-ip"></span>
