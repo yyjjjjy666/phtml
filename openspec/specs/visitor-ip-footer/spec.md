@@ -7,22 +7,34 @@ Every page of the site (index, docs, links, contact, gallery) SHALL include a `<
 
 #### Scenario: Footer rendered on every page
 - **WHEN** any page is loaded
-- **THEN** a footer element with `id="visitor-footer"` is present in the DOM
+- **THEN** a footer element with `id="visitor-footer"` is present in the DOM containing `<span id="visitor-ip">`, `<span id="visitor-location">`, and `<span id="visitor-org">`
 
-### Requirement: Visitor IP and related info fetched and displayed
-The footer SHALL asynchronously fetch the visitor's public IP, country, city, and ISP/organisation from `https://ipwho.is/` and display them in the footer.
+### Requirement: Visitor IP and location fetched and displayed
+The footer SHALL asynchronously fetch the visitor's public IP, country, and city from `https://ipapi.co/json/` and display them in the footer. The `visitor-org` span is reserved in the DOM but remains empty.
 
-#### Scenario: Successful fetch displays IP info
-- **WHEN** the page loads and the `ipwho.is` API responds successfully
-- **THEN** the footer displays the visitor's public IP address, country and city, and ISP/org name
+#### Scenario: Successful fetch displays IP and location
+- **WHEN** the page loads and the `ipapi.co` API responds successfully with a valid `ip` field
+- **THEN** the `visitor-ip` span displays `"ip: <address>"` and the `visitor-location` span displays `"<city>, <country_name>"` (omitting any falsy parts)
+- **AND** the `visitor-org` span remains empty
 
 #### Scenario: Loading state shown during fetch
 - **WHEN** the page loads before the API response arrives
-- **THEN** the footer displays a loading indicator (e.g., "loading...")
+- **THEN** the `visitor-ip` span displays `"loading..."` and the `visitor-location` span is empty
 
 #### Scenario: Fallback on fetch failure
-- **WHEN** the API request fails (network error or non-2xx response)
-- **THEN** the footer displays "ip info unavailable" and no error is thrown to the console
+- **WHEN** the API request fails (network error, non-2xx response, or missing `ip` field in response)
+- **THEN** the `visitor-ip` span displays `"ip info unavailable"`, `visitor-location` and `visitor-org` are cleared, and no error is thrown to the console
+
+### Requirement: Session caching of visitor info
+Fetched visitor data SHALL be persisted in `sessionStorage` under the key `"visitorInfo"` so that subsequent navigations within the same browser session skip the network request.
+
+#### Scenario: Cached data used on re-navigation
+- **WHEN** a page is loaded and `sessionStorage["visitorInfo"]` contains a previously fetched object with a valid `ip` field
+- **THEN** the footer populates immediately from cache without making a network request
+
+#### Scenario: Corrupt or incomplete cache ignored
+- **WHEN** `sessionStorage["visitorInfo"]` exists but the parsed object has no `ip` field
+- **THEN** the entry is removed from `sessionStorage` and a fresh fetch is made
 
 ### Requirement: Footer does not block page rendering
 The visitor info fetch SHALL be initiated asynchronously and SHALL NOT block the initial render of any page.
@@ -32,11 +44,11 @@ The visitor info fetch SHALL be initiated asynchronously and SHALL NOT block the
 - **THEN** all page content above the footer renders before the footer data is available
 
 ### Requirement: Footer visual design matches site theme
-The footer SHALL use the site's design system: dark background (`#2C2C2C` or slightly different shade), light text (`#E0E0E0`), `'Courier New', monospace` font, smaller font size than body text.
+The footer SHALL use the site's design system: dark background (`#1e1e1e`), light text (`#E0E0E0`), `'Courier New', monospace` font, `14px` font size (smaller than body text), fixed-positioned at the bottom of the viewport with `6px 16px` padding.
 
 #### Scenario: Footer styled consistently
 - **WHEN** the footer is rendered with data
-- **THEN** the footer background, font, and text color are consistent with the rest of the site
+- **THEN** the footer background is `#1e1e1e`, text color is `#E0E0E0`, font is `'Courier New', monospace` at `14px`, and spans are separated by `24px` gap
 
 ### Requirement: Footer fixed at bottom of viewport
 The footer SHALL be fixed to the bottom of the viewport so it remains visible without scrolling.
@@ -47,4 +59,4 @@ The footer SHALL be fixed to the bottom of the viewport so it remains visible wi
 
 #### Scenario: Main content not obscured by footer
 - **WHEN** any page is fully loaded
-- **THEN** the main content area has sufficient bottom padding so it is not hidden behind the fixed footer
+- **THEN** the main content area has sufficient bottom padding (`40px`) so it is not hidden behind the fixed footer
