@@ -46,3 +46,37 @@ main{
     color: #e0ff03;
     font-weight: 700;
 }
+
+/* gallery */
+.gallery-grid{
+    column-count: 3;
+    column-gap: 12px;
+}
+.gallery-item{
+    break-inside: avoid;
+    margin-bottom: 12px;
+}
+.gallery-item img{
+    width: 100%;
+    display: block;
+    cursor: pointer;
+}
+
+/* lightbox */
+#lightbox{
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.88);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+}
+#lightbox.open{
+    display: flex;
+}
+#lightbox-img{
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+}
