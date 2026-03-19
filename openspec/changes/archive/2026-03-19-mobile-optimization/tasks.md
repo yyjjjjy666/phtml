@@ -8,8 +8,8 @@
 
 ## 2. Verification
 
-- [ ] 2.1 Open `index.html` in browser DevTools at 375px width and confirm navbar stacks vertically
-- [ ] 2.2 Open `gallery.html` at 375px and confirm gallery shows 1 column
-- [ ] 2.3 Open `gallery.html` at 800px and confirm gallery shows 2 columns
-- [ ] 2.4 Confirm footer wraps without horizontal overflow at 375px
-- [ ] 2.5 Confirm main content is not hidden behind footer at 375px
+- [x] 2.1 Open `index.html` in browser DevTools at 375px width and confirm navbar stacks vertically
+- [x] 2.2 Open `gallery.html` at 375px and confirm gallery shows 1 column
+- [x] 2.3 Open `gallery.html` at 800px and confirm gallery shows 2 columns
+- [x] 2.4 Confirm footer wraps without horizontal overflow at 375px
+- [x] 2.5 Confirm main content is not hidden behind footer at 375px
