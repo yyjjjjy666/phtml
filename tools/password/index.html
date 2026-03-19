@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>password generator</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script>(function(){var t=localStorage.getItem("theme");if(!t)t=window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";document.documentElement.dataset.theme=t;}());</script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="/" class="non-active">main page</a></li>
+                <li><a href="/wiki" class="non-active">wiki</a></li>
+                <li><a href="/gallery" class="non-active">gallery</a></li>
+                <li class="dropdown">
+                    <a href="/tools" class="active">tools</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/tools/wheel">wheel</a></li>
+                        <li><a href="/tools/password">password</a></li>
+                    </ul>
+                </li>
+                <li><a href="/contact" class="non-active">contact</a></li>
+                <li id="theme-li"><span class="theme-lbl" id="lbl-dt">dt</span><button id="theme-btn" title="toggle theme"></button><span class="theme-lbl" id="lbl-lt">lt</span></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div id="pw-page">
+
+            <!-- no-server notice -->
+            <p id="pw-notice">all generation happens in your browser — nothing is sent to any server</p>
+
+            <!-- tab bar -->
+            <div id="pw-tabs">
+                <button class="pw-tab active" data-tab="generate">generate</button>
+                <button class="pw-tab" data-tab="passphrase">passphrase</button>
+                <button class="pw-tab" data-tab="deterministic">deterministic</button>
+                <button class="pw-tab" data-tab="pattern">pattern</button>
+            </div>
+
+            <!-- TAB: generate -->
+            <div class="pw-panel" id="tab-generate">
+                <div id="pw-presets-row">
+                    <label for="pw-preset">preset:</label>
+                    <select id="pw-preset">
+                        <option value="default">default (16, all classes)</option>
+                        <option value="gmail">gmail (20, all classes)</option>
+                        <option value="apple">apple id (20, all classes)</option>
+                        <option value="pin">pin (6 digits)</option>
+                        <option value="high">high-security (32, all classes)</option>
+                    </select>
+                </div>
+                <div id="pw-length-row">
+                    <label for="pw-length">length: <span id="pw-length-val">16</span></label>
+                    <input id="pw-length" type="range" min="4" max="64" value="16">
+                </div>
+                <div id="pw-charset-row">
+                    <label><input type="checkbox" id="pw-lower" checked> lowercase (a–z)</label>
+                    <label><input type="checkbox" id="pw-upper" checked> uppercase (A–Z)</label>
+                    <label><input type="checkbox" id="pw-digits" checked> digits (0–9)</label>
+                    <label><input type="checkbox" id="pw-symbols" checked> symbols (!@#…)</label>
+                    <label><input type="checkbox" id="pw-nosimilar" checked> exclude similar (O,0,l,I,1)</label>
+                </div>
+                <button id="pw-gen-btn">generate</button>
+            </div>
+
+            <!-- TAB: passphrase -->
+            <div class="pw-panel hidden" id="tab-passphrase">
+                <div class="pw-row">
+                    <label for="pp-count">words: <span id="pp-count-val">4</span></label>
+                    <input id="pp-count" type="range" min="3" max="8" value="4">
+                </div>
+                <div class="pw-row">
+                    <label for="pp-sep">separator:</label>
+                    <input id="pp-sep" type="text" maxlength="3" value="-" style="width:40px">
+                </div>
+                <div class="pw-row">
+                    <label><input type="checkbox" id="pp-caps"> capitalize words</label>
+                </div>
+                <div class="pw-row">
+                    <label><input type="checkbox" id="pp-extra"> append number+symbol</label>
+                </div>
+                <button id="pp-gen-btn">generate</button>
+            </div>
+
+            <!-- TAB: deterministic -->
+            <div class="pw-panel hidden" id="tab-deterministic">
+                <div class="pw-row">
+                    <label for="det-master">master phrase:</label>
+                    <input id="det-master" type="password" placeholder="never stored or sent" autocomplete="off">
+                </div>
+                <div class="pw-row">
+                    <label for="det-domain">domain:</label>
+                    <input id="det-domain" type="text" placeholder="e.g. github.com" autocomplete="off">
+                </div>
+                <div class="pw-row">
+                    <label for="det-length">length: <span id="det-length-val">20</span></label>
+                    <input id="det-length" type="range" min="8" max="64" value="20">
+                </div>
+                <button id="det-gen-btn">derive</button>
+                <span id="det-spinner" class="hidden">deriving…</span>
+            </div>
+
+            <!-- TAB: pattern -->
+            <div class="pw-panel hidden" id="tab-pattern">
+                <div class="pw-row">
+                    <label for="pat-input">pattern: <span id="pat-hint">(A=upper a=lower 0=digit !=symbol *=any, literal otherwise)</span></label>
+                    <input id="pat-input" type="text" placeholder="e.g. Aa0!Aa0!" value="Aa0!Aa0!" maxlength="64">
+                </div>
+                <div class="pw-row" id="pat-preview-row">output length: <span id="pat-length-preview">8</span></div>
+                <button id="pat-gen-btn">generate</button>
+            </div>
+
+            <!-- shared output -->
+            <div id="pw-output-area">
+                <div id="pw-result-row">
+                    <input id="pw-result" type="text" readonly placeholder="your password appears here">
+                    <button id="pw-copy-btn">copy</button>
+                    <button id="pw-qr-toggle">qr</button>
+                </div>
+                <canvas id="pw-qr" class="hidden"></canvas>
+                <div id="pw-clip-row" class="hidden">
+                    clipboard clears in <span id="pw-clip-countdown">30</span>s
+                    <button id="pw-clip-clear">clear now</button>
+                </div>
+                <div id="pw-clip-timeout-row">
+                    <label for="pw-clip-timeout">clear after (s):</label>
+                    <input id="pw-clip-timeout" type="number" min="10" max="120" value="30" style="width:55px">
+                </div>
+            </div>
+
+            <!-- strength meter -->
+            <div id="pw-meter-area">
+                <div id="pw-meter-bar-wrap"><div id="pw-meter-bar"></div></div>
+                <span id="pw-strength-label"></span>
+                <span id="pw-entropy-label"></span>
+                <table id="pw-crack-table" class="hidden">
+                    <tr><th>threat</th><th>estimated crack time</th></tr>
+                    <tr><td>gpu cluster (10B/s)</td><td id="pw-crack-fast">—</td></tr>
+                    <tr><td>nation-state (100T/s)</td><td id="pw-crack-nation">—</td></tr>
+                </table>
+            </div>
+
+            <!-- HIBP -->
+            <div id="pw-hibp-row">
+                <button id="pw-hibp-btn">check breach <small>(sends anonymized hash prefix to haveibeenpwned.com)</small></button>
+                <span id="pw-hibp-result"></span>
+            </div>
+
+            <!-- history -->
+            <div id="pw-history-wrap">
+                <button id="pw-history-toggle">history ▾</button>
+                <div id="pw-history-panel" class="hidden">
+                    <ul id="pw-history-list"></ul>
+                    <button id="pw-history-clear">clear history</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+    <footer id="visitor-footer">
+        <span id="visitor-ip"></span>
+        <span id="visitor-location"></span>
+        <span id="visitor-org"></span>
+    </footer>
+    <script src="/js/password.js"></script>
+    <script src="/js/theme.js"></script>
+    <script src="/js/visitor-info.js"></script>
+</body>
+</html>

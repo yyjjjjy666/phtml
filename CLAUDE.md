@@ -13,19 +13,22 @@ Static HTML personal website hosted on GitHub Pages at `geller.ee`. No build pro
 ```
 phtml/
 ├── index.html              ← geller.ee/
-├── docs/index.html         ← geller.ee/docs
-├── links/index.html        ← geller.ee/links
+├── wiki/index.html         ← geller.ee/wiki  (combined docs + links)
+├── docs/index.html         ← redirects to /wiki
+├── links/index.html        ← redirects to /wiki
 ├── gallery/index.html      ← geller.ee/gallery
 ├── contact/index.html      ← geller.ee/contact
 ├── tools/
 │   ├── index.html          ← geller.ee/tools  (hub listing all tools)
-│   └── wheel/index.html    ← geller.ee/tools/wheel
+│   ├── wheel/index.html    ← geller.ee/tools/wheel
+│   └── password/index.html ← geller.ee/tools/password
 ├── css/styles.css          ← single shared stylesheet
 ├── js/
 │   ├── visitor-info.js     ← footer IP fetch (shared, all pages)
 │   ├── gallery.js          ← lightbox logic
-│   └── wheel.js            ← fortune wheel logic
-├── files/                  ← personal guide files (.txt, .pdf) — NOT the docs page
+│   ├── wheel.js            ← fortune wheel logic
+│   └── password.js         ← password generator logic
+├── files/                  ← personal guide files (.txt, .pdf)
 ├── images/                 ← gallery images
 └── data/                   ← misc data files (JSON etc.)
 ```
@@ -39,7 +42,7 @@ Pages use `folder/index.html` so GitHub Pages serves them at `geller.ee/page` wi
 All internal `href` and `src` attributes use root-relative paths starting with `/`:
 - `/css/styles.css` — not `css/styles.css` or `../../css/styles.css`
 - `/js/visitor-info.js`
-- `/docs`, `/links`, `/gallery`, `/tools`, `/tools/wheel`
+- `/wiki`, `/gallery`, `/tools`, `/tools/wheel`, `/tools/password`
 
 This works from any subfolder depth. **Note:** root-relative paths break with `file://` — always use `python -m http.server 8080` for local testing.
 
@@ -52,6 +55,7 @@ Every page has the same `<nav class="navbar">`. The current page gets `class="ac
     <a href="/tools" class="non-active">tools</a>
     <ul class="dropdown-menu">
         <li><a href="/tools/wheel">wheel</a></li>
+        <li><a href="/tools/password">password</a></li>
     </ul>
 </li>
 ```

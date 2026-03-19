@@ -2,11 +2,20 @@ var items = [];
 var isSpinning = false;
 var currentRotation = 0;
 
-var COLORS = ['#e0ff03', '#555555'];
-var TEXT_COLOR_ON_YELLOW = '#000000';
-var TEXT_COLOR_ON_DARK = '#E0E0E0';
+var COLORS_DARK  = ['#e0ff03','#7c3aed','#ef4444','#3b82f6','#10b981','#f97316','#ec4899','#06b6d4','#84cc16','#a855f7'];
+var COLORS_LIGHT = ['#7c3aed','#1565c0','#c62828','#2e7d32','#ef6c00','#00838f','#ad1457','#4527a0','#558b2f','#00695c'];
+
 var MAX_ITEMS = 20;
 var MAX_LABEL_CHARS = 12;
+
+function getColors() {
+    return document.documentElement.dataset.theme === 'light' ? COLORS_LIGHT : COLORS_DARK;
+}
+
+function textColorFor(bgColor) {
+    // #e0ff03 is bright yellow — use black text; everything else white
+    return bgColor === '#e0ff03' ? '#000000' : '#ffffff';
+}
 
 function truncate(label) {
     return label.length > MAX_LABEL_CHARS ? label.slice(0, MAX_LABEL_CHARS) + '…' : label;
@@ -30,25 +39,27 @@ function drawWheel(rotation) {
     var cx = canvas.width / 2;
     var cy = canvas.height / 2;
     var r = Math.min(cx, cy) - 10;
+    var isLight = document.documentElement.dataset.theme === 'light';
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     if (items.length === 0) {
-        ctx.fillStyle = '#383838';
+        ctx.fillStyle = isLight ? '#f0edf8' : '#383838';
         ctx.beginPath();
         ctx.arc(cx, cy, r, 0, Math.PI * 2);
         ctx.fill();
-        ctx.fillStyle = '#666';
+        ctx.fillStyle = isLight ? '#888' : '#666';
         ctx.font = '16px Courier New';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText('add items to spin', cx, cy);
     } else {
+        var colors = getColors();
         var segAngle = (Math.PI * 2) / items.length;
         for (var i = 0; i < items.length; i++) {
             var startAngle = rotation + i * segAngle - Math.PI / 2;
             var endAngle = startAngle + segAngle;
-            var color = COLORS[i % 2];
+            var color = colors[i % colors.length];
 
             // segment
             ctx.beginPath();
@@ -57,7 +68,7 @@ function drawWheel(rotation) {
             ctx.closePath();
             ctx.fillStyle = color;
             ctx.fill();
-            ctx.strokeStyle = '#2C2C2C';
+            ctx.strokeStyle = isLight ? '#f5f5f0' : '#2C2C2C';
             ctx.lineWidth = 2;
             ctx.stroke();
 
@@ -70,7 +81,7 @@ function drawWheel(rotation) {
             ctx.save();
             ctx.translate(lx, ly);
             ctx.rotate(midAngle + Math.PI / 2);
-            ctx.fillStyle = color === '#e0ff03' ? TEXT_COLOR_ON_YELLOW : TEXT_COLOR_ON_DARK;
+            ctx.fillStyle = textColorFor(color);
             ctx.font = 'bold 13px Courier New';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
@@ -87,7 +98,7 @@ function drawWheel(rotation) {
     ctx.lineTo(px - 10, py - 18);
     ctx.lineTo(px + 10, py - 18);
     ctx.closePath();
-    ctx.fillStyle = '#e0ff03';
+    ctx.fillStyle = isLight ? '#7c3aed' : '#e0ff03';
     ctx.fill();
 }
 

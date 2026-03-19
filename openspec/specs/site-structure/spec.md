@@ -6,7 +6,7 @@
 Every page SHALL be accessible without a file extension. URLs SHALL follow the pattern `geller.ee/<page>` for top-level pages and `geller.ee/tools/<tool>` for tools.
 
 #### Scenario: Top-level page URL
-- **WHEN** a user navigates to `geller.ee/docs`, `geller.ee/links`, `geller.ee/gallery`, or `geller.ee/contact`
+- **WHEN** a user navigates to `geller.ee/wiki`, `geller.ee/gallery`, or `geller.ee/contact`
 - **THEN** the correct page loads without a `.html` extension in the URL
 
 #### Scenario: Tool URL
@@ -18,14 +18,14 @@ A page at `geller.ee/tools` SHALL list all available interactive tools with thei
 
 #### Scenario: Hub lists all tools
 - **WHEN** a user visits `geller.ee/tools`
-- **THEN** all available tools are listed with links to their individual pages
+- **THEN** all available tools are listed with links to their individual pages, including "wheel" and "password"
 
 ### Requirement: Tools nav dropdown on desktop
 On viewports wider than 600px, hovering the "tools" nav item SHALL reveal a dropdown listing all tools. Clicking the "tools" nav item SHALL navigate to the hub page.
 
 #### Scenario: Dropdown appears on hover
 - **WHEN** a desktop user hovers over the "tools" nav item
-- **THEN** a dropdown menu appears below it listing each tool as a clickable link
+- **THEN** a dropdown menu appears below it listing each tool as a clickable link, including "wheel" and "password"
 
 #### Scenario: Dropdown hidden on mobile
 - **WHEN** the viewport is 600px or less

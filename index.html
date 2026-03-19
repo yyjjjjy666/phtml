@@ -5,22 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>main page</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <script>(function(){var t=localStorage.getItem("theme");if(!t)t=window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";document.documentElement.dataset.theme=t;}());</script>
 </head>
 <body>
     <header>
         <nav class="navbar">
             <ul>
                 <li><a href="/" class="active">main page</a></li>
-                <li><a href="/docs" class="non-active">docs</a></li>
-                <li><a href="/links" class="non-active">links</a></li>
+                <li><a href="/wiki" class="non-active">wiki</a></li>
                 <li><a href="/gallery" class="non-active">gallery</a></li>
                 <li class="dropdown">
                     <a href="/tools" class="non-active">tools</a>
                     <ul class="dropdown-menu">
                         <li><a href="/tools/wheel">wheel</a></li>
+                        <li><a href="/tools/password">password</a></li>
                     </ul>
                 </li>
                 <li><a href="/contact" class="non-active">contact</a></li>
+                <li id="theme-li"><span class="theme-lbl" id="lbl-dt">dt</span><button id="theme-btn" title="toggle theme"></button><span class="theme-lbl" id="lbl-lt">lt</span></li>
             </ul>
         </nav>
     </header>
@@ -35,6 +37,7 @@
         <span id="visitor-location"></span>
         <span id="visitor-org"></span>
     </footer>
+    <script src="/js/theme.js"></script>
     <script src="/js/visitor-info.js"></script>
 </body>
 </html>
