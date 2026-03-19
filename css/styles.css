@@ -79,6 +79,17 @@ main{
     cursor: pointer;
 }
 
+/* responsive */
+@media (max-width: 900px) {
+    .gallery-grid { column-count: 2; }
+}
+@media (max-width: 600px) {
+    .gallery-grid { column-count: 1; }
+    .navbar li { float: none; display: block; width: 100%; }
+    main { padding-bottom: 60px; }
+    #visitor-footer { flex-wrap: wrap; gap: 12px; }
+}
+
 /* lightbox */
 #lightbox{
     display: none;
