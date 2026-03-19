@@ -10,28 +10,28 @@ document.addEventListener('DOMContentLoaded', function () {
     orgEl.textContent = '';
 
     function populate(data) {
-        ipEl.textContent = 'ip: ' + data.ipAddress;
-        locEl.textContent = [data.cityName, data.countryName].filter(Boolean).join(', ') || '';
+        ipEl.textContent = 'ip: ' + data.ip;
+        locEl.textContent = [data.city, data.country_name].filter(Boolean).join(', ') || '';
         orgEl.textContent = '';
     }
 
     var cached = sessionStorage.getItem('visitorInfo');
     if (cached) {
         var parsed = JSON.parse(cached);
-        if (parsed.ipAddress) {
+        if (parsed.ip) {
             populate(parsed);
             return;
         }
         sessionStorage.removeItem('visitorInfo');
     }
 
-    fetch('https://freeipapi.com/api/json')
+    fetch('https://ipapi.co/json/')
         .then(function (res) {
             if (!res.ok) throw new Error('non-ok response');
             return res.json();
         })
         .then(function (data) {
-            if (!data.ipAddress) throw new Error('api error');
+            if (!data.ip) throw new Error('api error');
             sessionStorage.setItem('visitorInfo', JSON.stringify(data));
             populate(data);
         })
