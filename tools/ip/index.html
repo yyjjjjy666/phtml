@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ip lookup</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script>(function(){var t=localStorage.getItem("theme");if(!t)t=window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";document.documentElement.dataset.theme=t;}());</script>
+    <style>
+        #ip-page { max-width: 680px; margin-top: 16px; }
+        #ip-lookup-row { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+        #ip-input {
+            flex: 1;
+            min-width: 180px;
+            background-color: #383838;
+            border: 1px solid #555;
+            color: #E0E0E0;
+            font-family: 'Courier New', monospace;
+            font-size: 15px;
+            padding: 7px 12px;
+        }
+        #ip-lookup-btn {
+            background-color: #e0ff03;
+            color: #000;
+            border: none;
+            font-family: 'Courier New', monospace;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 7px 20px;
+            cursor: pointer;
+            text-transform: lowercase;
+            letter-spacing: 1px;
+        }
+        #ip-status { font-size: 14px; color: #aaa; min-height: 20px; margin-bottom: 12px; }
+        #ip-status.error { color: #e07070; }
+        .ip-section { margin-bottom: 20px; }
+        .ip-section h3 {
+            font-size: 14px;
+            text-transform: lowercase;
+            letter-spacing: 1px;
+            color: #e0ff03;
+            margin: 0 0 8px 0;
+            border-bottom: 1px solid #444;
+            padding-bottom: 4px;
+        }
+        .ip-dl {
+            display: grid;
+            grid-template-columns: 160px 1fr;
+            gap: 4px 12px;
+            margin: 0;
+        }
+        .ip-dl dt {
+            color: #888;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+        .ip-dl dd {
+            margin: 0;
+            font-size: 14px;
+            color: #E0E0E0;
+            word-break: break-all;
+        }
+        /* light theme */
+        [data-theme="light"] #ip-input {
+            background-color: #f0edf8;
+            border-color: #c4b5fd;
+            color: #1a1a1a;
+        }
+        [data-theme="light"] #ip-lookup-btn {
+            background-color: #7c3aed;
+            color: #fff;
+        }
+        [data-theme="light"] #ip-status { color: #666; }
+        [data-theme="light"] .ip-section h3 { color: #7c3aed; border-bottom-color: #c4b5fd; }
+        [data-theme="light"] .ip-dl dt { color: #888; }
+        [data-theme="light"] .ip-dl dd { color: #1a1a1a; }
+        @media (max-width: 600px) {
+            .ip-dl { grid-template-columns: 120px 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li id="nav-toggle-li"><button id="nav-toggle" aria-label="menu">&#9776;</button></li>
+                <li><a href="/" class="non-active">main page</a></li>
+                <li><a href="/wiki" class="non-active">wiki</a></li>
+                <li><a href="/gallery" class="non-active">gallery</a></li>
+                <li class="dropdown">
+                    <a href="/tools" class="active">tools</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/tools/wheel">wheel</a></li>
+                        <li><a href="/tools/password">password</a></li>
+                        <li><a href="/tools/ip">ip</a></li>
+                    </ul>
+                </li>
+                <li><a href="/contact" class="non-active">contact</a></li>
+                <li id="theme-li"><span class="theme-lbl" id="lbl-dt">dt</span><button id="theme-btn" title="toggle theme"></button><span class="theme-lbl" id="lbl-lt">lt</span></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div id="ip-page">
+            <h2>ip lookup</h2>
+            <div id="ip-lookup-row">
+                <input id="ip-input" type="text" placeholder="enter ip address (blank = your ip)" autocomplete="off" spellcheck="false">
+                <button id="ip-lookup-btn">look up</button>
+            </div>
+            <div id="ip-status">loading...</div>
+            <div id="ip-results"></div>
+        </div>
+    </main>
+    <script src="/js/ip-tool.js"></script>
+    <script src="/js/theme.js"></script>
+    <script src="/js/nav-scroll.js"></script>
+</body>
+</html>
