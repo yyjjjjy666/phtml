@@ -282,19 +282,13 @@ main{
 [data-theme="light"] #nav-toggle { color: #1a1a1a; }
 
 @media (max-width: 600px) {
-    /* show hamburger, hide all nav items except toggle and theme */
-    .navbar > ul { position: relative; }
-    #nav-toggle-li { display: block; float: left; width: auto; }
-    .navbar > ul > li:not(#nav-toggle-li):not(#theme-li) { display: none; }
-    /* theme toggle anchored top-right so it stays in place when menu opens */
-    #theme-li { position: absolute; right: 0; top: 0; float: none; width: auto; }
-    /* open state: show all items stacked below the bar row */
-    .navbar.nav-open > ul > li:not(#nav-toggle-li):not(#theme-li) {
-        display: block;
-        float: none;
-        width: 100%;
-        clear: left;
-    }
+    /* flexbox nav: order controls position regardless of DOM order */
+    .navbar > ul { display: flex; flex-wrap: wrap; align-items: center; }
+    #nav-toggle-li { order: 1; width: auto; }
+    #theme-li { order: 2; margin-left: auto; width: auto; float: none; }
+    .navbar > ul > li:not(#nav-toggle-li):not(#theme-li) { order: 3; display: none; width: 100%; }
+    /* open state: nav links stack below the hamburger+toggle row */
+    .navbar.nav-open > ul > li:not(#nav-toggle-li):not(#theme-li) { display: block; }
 }
 
 /* theme toggle */
