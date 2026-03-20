@@ -32,3 +32,23 @@
 - [x] 6.2 Under `@media (max-width: 600px)`: set `#pw-output-area`, `.pw-panel`, `#pw-history-panel` to `width: 100%; box-sizing: border-box` and reduce padding
 - [x] 6.3 Under `@media (max-width: 600px)`: set range inputs and text inputs inside `.pw-panel` to `width: 100%; box-sizing: border-box`
 - [x] 6.4 Under `@media (max-width: 600px)`: ensure no element inside `.pw-panel` causes horizontal overflow (check fixed widths, add `overflow-x: hidden` to page wrapper if needed)
+
+## 7. CSS — hamburger menu
+
+- [x] 7.1 Hide `#nav-toggle-li` on desktop (`display: none`); inside `@media (max-width: 600px)` show it (`display: block; float: left`) and hide all other `li` except `#theme-li`
+- [x] 7.2 When `.navbar.nav-open`, show all hidden `li` as stacked blocks; change `#nav-toggle` icon to `✕`
+- [x] 7.3 Style `#nav-toggle` button: borderless, same height as nav, `font-size: 20px`, cursor pointer
+
+## 8. JS — hamburger toggle
+
+- [x] 8.1 In `nav-scroll.js`: on mobile, attach click handler to `#nav-toggle` that toggles `.nav-open` on `.navbar` and updates button text `☰`/`✕`; suppress scroll-hide while menu is open; close menu on outside click
+
+## 9. HTML — add hamburger button to all pages
+
+- [x] 9.1 Add `<li id="nav-toggle-li"><button id="nav-toggle" aria-label="menu">☰</button></li>` as first item in `<ul>` in `index.html`
+- [x] 9.2 Same in `wiki/index.html`
+- [x] 9.3 Same in `gallery/index.html`
+- [x] 9.4 Same in `contact/index.html`
+- [x] 9.5 Same in `tools/index.html`
+- [x] 9.6 Same in `tools/wheel/index.html`
+- [x] 9.7 Same in `tools/password/index.html`

@@ -12,18 +12,25 @@ The site uses a single shared `css/styles.css` with one existing mobile breakpoi
 
 **Non-Goals:**
 - Full flexbox nav rewrite — keep existing float layout, adjust sizes only
-- Hamburger menu — stacked full-width links (already implemented) are sufficient
 - Tablet-specific layouts (601–900px) beyond what already exists
 
 ## Decisions
 
+### Hamburger menu on mobile
+
+**Decision:** On ≤600px, a `☰` button (`#nav-toggle`) replaces the visible nav. All `<li>` items except the toggle and theme button are hidden by default. Clicking `☰` toggles `.nav-open` on `.navbar`, revealing items stacked below in a full-width list. The `☰` icon changes to `✕` when open.
+
+**Alternative considered:** Keeping the stacked full-width list visible — takes ~200px of vertical space on a 667px screen, obscuring content.
+
+**Rationale:** Standard mobile pattern. Keeps the nav to a single ~38px bar. Uses the same class-toggle pattern as theme.js. No extra dependencies.
+
 ### Scroll-hide via JS + CSS class
 
-**Decision:** A small scroll listener in `js/nav-scroll.js` adds/removes a `.nav-hidden` class on `<nav>`. CSS transitions handle the animation (`transform: translateY(-100%)` with `transition: transform 0.25s ease`). Only active on `≤600px` via a `matchMedia` guard so desktop nav is unaffected.
+**Decision:** `js/nav-scroll.js` adds/removes `.nav-hidden` (`transform: translateY(-100%)`) based on scroll direction. Scroll-hide is suppressed when the menu is open (`.nav-open`). Only active on ≤600px via a `matchMedia` guard.
 
-**Alternative considered:** Pure CSS `position: sticky` with scroll-linked animation — not supported without JS in a meaningful way for hide-on-down / show-on-up.
+**Alternative considered:** Pure CSS scroll-linked animation — not supported without JS.
 
-**Rationale:** Minimal JS, no framework, easy to maintain. The class toggle pattern matches how `theme.js` was added.
+**Rationale:** Minimal JS, no framework, easy to maintain.
 
 ### Canvas scaling on wheel page
 

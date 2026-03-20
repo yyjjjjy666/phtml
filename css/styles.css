@@ -283,6 +283,38 @@ main{
     object-fit: contain;
 }
 
+/* hamburger */
+#nav-toggle-li { display: none; }
+#nav-toggle {
+    background: none;
+    border: none;
+    color: #EEEEEE;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 6px 12px;
+    line-height: 1;
+    font-family: 'Courier New', monospace;
+}
+[data-theme="light"] #nav-toggle { color: #1a1a1a; }
+
+@media (max-width: 600px) {
+    /* show hamburger, hide all nav items except toggle and theme */
+    #nav-toggle-li { display: block; float: left; }
+    .navbar > ul > li:not(#nav-toggle-li):not(#theme-li) { display: none; }
+    /* open state: show all items stacked */
+    .navbar.nav-open > ul > li:not(#nav-toggle-li):not(#theme-li) {
+        display: block;
+        float: none;
+        width: 100%;
+    }
+    .navbar.nav-open > ul > li#theme-li {
+        float: none;
+        width: 100%;
+        height: auto;
+        padding: 6px 12px;
+    }
+}
+
 /* theme toggle */
 #theme-li{
     float: right;
