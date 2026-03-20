@@ -301,17 +301,14 @@ main{
     /* show hamburger, hide all nav items except toggle and theme */
     #nav-toggle-li { display: block; float: left; }
     .navbar > ul > li:not(#nav-toggle-li):not(#theme-li) { display: none; }
-    /* open state: show all items stacked */
+    /* theme toggle always stays floated right in the bar */
+    #theme-li { float: right; }
+    /* open state: show all items stacked below the bar row */
     .navbar.nav-open > ul > li:not(#nav-toggle-li):not(#theme-li) {
         display: block;
         float: none;
         width: 100%;
-    }
-    .navbar.nav-open > ul > li#theme-li {
-        float: none;
-        width: 100%;
-        height: auto;
-        padding: 6px 12px;
+        clear: left;
     }
 }
 
