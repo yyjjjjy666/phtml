@@ -52,3 +52,7 @@
 - [x] 9.5 Same in `tools/index.html`
 - [x] 9.6 Same in `tools/wheel/index.html`
 - [x] 9.7 Same in `tools/password/index.html`
+
+## 10. CSS — fix toggle/hamburger row alignment
+
+- [x] 10.1 In the hamburger `@media (max-width: 600px)` block, add `width: auto` to `#nav-toggle-li` and `#theme-li` to override the `width: 100%` set by `.navbar li` earlier in the same query — this keeps both on the same row

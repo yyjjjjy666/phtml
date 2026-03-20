@@ -14,11 +14,15 @@ Every page SHALL be accessible without a file extension. URLs SHALL follow the p
 - **THEN** the wheel tool page loads
 
 ### Requirement: Tools hub page
-A page at `geller.ee/tools` SHALL list all available interactive tools with their names and brief descriptions.
+A page at `geller.ee/tools` SHALL list all available interactive tools with their names and brief descriptions. The homepage at `geller.ee/` SHALL also serve as a personal dashboard with widgets for clock, weather, tasks, search, and quick links.
 
 #### Scenario: Hub lists all tools
 - **WHEN** a user visits `geller.ee/tools`
 - **THEN** all available tools are listed with links to their individual pages, including "wheel", "password", and "ip"
+
+#### Scenario: Homepage serves as dashboard
+- **WHEN** a user visits `geller.ee/`
+- **THEN** the homepage displays personal dashboard widgets including a clock, weather, time progress bars, search bar, daily tasks, quick links, daily intention, and a quote of the day
 
 ### Requirement: Tools nav dropdown on desktop
 On viewports wider than 600px, hovering the "tools" nav item SHALL reveal a dropdown listing all tools. Clicking the "tools" nav item SHALL navigate to the hub page.

@@ -283,10 +283,10 @@ main{
 
 @media (max-width: 600px) {
     /* show hamburger, hide all nav items except toggle and theme */
-    #nav-toggle-li { display: block; float: left; }
+    #nav-toggle-li { display: block; float: left; width: auto; }
     .navbar > ul > li:not(#nav-toggle-li):not(#theme-li) { display: none; }
     /* theme toggle always stays floated right in the bar */
-    #theme-li { float: right; }
+    #theme-li { float: right; width: auto; }
     /* open state: show all items stacked below the bar row */
     .navbar.nav-open > ul > li:not(#nav-toggle-li):not(#theme-li) {
         display: block;
