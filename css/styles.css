@@ -284,7 +284,7 @@ main{
 @media (max-width: 600px) {
     /* flexbox nav: order controls position regardless of DOM order */
     .navbar > ul { display: flex; flex-wrap: wrap; align-items: center; }
-    #nav-toggle-li { order: 1; width: auto; }
+    #nav-toggle-li { display: block; order: 1; width: auto; }
     #theme-li { order: 2; margin-left: auto; width: auto; float: none; }
     .navbar > ul > li:not(#nav-toggle-li):not(#theme-li) { order: 3; display: none; width: 100%; }
     /* open state: nav links stack below the hamburger+toggle row */
