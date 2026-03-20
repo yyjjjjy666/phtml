@@ -203,5 +203,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     spinBtn.addEventListener('click', spin);
 
+    function resizeCanvas() {
+        var canvas = document.getElementById('wheel-canvas');
+        if (window.matchMedia('(max-width: 600px)').matches) {
+            var size = canvas.parentElement.offsetWidth || 300;
+            canvas.width = size;
+            canvas.height = size;
+        }
+    }
+
+    resizeCanvas();
     drawWheel(0);
+
+    window.addEventListener('resize', function() {
+        resizeCanvas();
+        drawWheel(currentRotation);
+    });
 });

@@ -126,6 +126,19 @@ main{
     .navbar li { float: none; display: block; width: 100%; }
     main { padding-bottom: 60px; }
     #visitor-footer { flex-wrap: wrap; gap: 12px; }
+    /* nav scroll-hide */
+    .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 200;
+        transition: transform 0.25s ease;
+    }
+    .nav-hidden { transform: translateY(-100%); }
+    /* compact nav on mobile */
+    .navbar a { font-size: 14px; padding: 7px 8px; }
+    #theme-li { padding: 0 8px; height: 30px; }
 }
 
 /* wheel */
@@ -542,6 +555,17 @@ main{
     }
 }
 
+/* wheel — mobile */
+@media (max-width: 600px) {
+    #wheel-page { flex-direction: column; gap: 16px; }
+    #wheel-canvas { width: 100% !important; height: auto !important; max-width: 100%; }
+    #wheel-controls { min-width: 0; width: 100%; }
+    #item-input-row { flex-direction: column; }
+    #item-input, #duration-input { width: 100%; box-sizing: border-box; }
+    #duration-input { width: 100%; }
+    #spin-btn { width: 100%; align-self: stretch; }
+}
+
 /* password tool */
 #pw-page{
     max-width: 700px;
@@ -802,3 +826,21 @@ main{
 #pw-history-clear:hover{ border-color: #e07070; color: #e07070; }
 #det-spinner{ color: #aaa; font-size: 14px; margin-left: 10px; }
 #pat-preview-row{ font-size: 13px; color: #888; }
+
+/* password tool — mobile */
+@media (max-width: 600px) {
+    #pw-page { max-width: 100%; overflow-x: hidden; }
+    #pw-tabs { overflow-x: auto; white-space: nowrap; flex-wrap: nowrap; }
+    .pw-tab { font-size: 13px; padding: 8px 10px; flex-shrink: 0; }
+    .pw-panel { padding: 12px 10px; }
+    #pw-output-area, #pw-meter-area, #pw-history-panel { width: 100%; box-sizing: border-box; padding: 10px; }
+    #pw-result-row { flex-wrap: wrap; }
+    #pw-result { min-width: 0; width: 100%; box-sizing: border-box; }
+    #pw-length, #pp-count, #det-length { width: 100%; }
+    .pw-panel input[type="text"],
+    .pw-panel input[type="password"],
+    .pw-panel select { width: 100%; box-sizing: border-box; }
+    #pw-presets-row select, #pw-preset { width: 100%; box-sizing: border-box; }
+    #pw-crack-table { font-size: 12px; }
+    #pw-crack-table th, #pw-crack-table td { padding: 3px 4px; }
+}
