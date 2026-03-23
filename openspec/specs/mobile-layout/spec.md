@@ -2,20 +2,27 @@
 
 ## Requirements
 
+### Requirement: Dashboard single-column stack on mobile
+On viewports below 600px the homepage dashboard SHALL render all widgets in a single vertically stacked column with comfortable vertical spacing between widgets.
+
+#### Scenario: Dashboard stacks on mobile
+- **WHEN** viewport width is below 600px
+- **THEN** all dashboard zone grids have `grid-template-columns: 1fr` and widgets are stacked vertically without horizontal overflow
+
 ### Requirement: Responsive navbar on small screens
-On viewports ≤600px the navbar SHALL stack navigation items vertically, each item taking full width, with reduced font size and padding so the menu is compact, so all links are accessible without horizontal scrolling.
+On viewports ≤768px the navbar SHALL show only the site wordmark and a hamburger button. Tapping the hamburger SHALL open a full-width slide-in drawer containing all nav links. The drawer SHALL close when a link is tapped or when the hamburger is tapped again.
 
-#### Scenario: Navbar stacks on mobile
-- **WHEN** the viewport width is 600px or less
-- **THEN** each `.navbar li` is displayed as a full-width block element
+#### Scenario: Drawer opens on hamburger tap
+- **WHEN** viewport is ≤768px and user taps the hamburger button
+- **THEN** a full-width nav drawer slides in from the top (or side), revealing all nav links
 
-#### Scenario: Navbar remains horizontal on desktop
-- **WHEN** the viewport width is greater than 600px
-- **THEN** `.navbar li` items are displayed inline (float left) as before
+#### Scenario: Drawer closes on link tap
+- **WHEN** the nav drawer is open and user taps a nav link
+- **THEN** the drawer closes and navigation proceeds
 
-#### Scenario: Navbar font size is reduced on mobile
-- **WHEN** the viewport width is 600px or less
-- **THEN** the navbar font size and item padding are smaller than their desktop values
+#### Scenario: Desktop navbar remains horizontal
+- **WHEN** viewport is greater than 768px
+- **THEN** nav links are displayed horizontally in a single bar without a hamburger button visible
 
 ### Requirement: Responsive gallery grid
 The gallery grid SHALL reduce column count on smaller viewports: 2 columns at ≤900px and 1 column at ≤600px.
@@ -56,3 +63,17 @@ On viewports ≤600px the `<main>` element SHALL have at least `60px` of bottom 
 #### Scenario: Sufficient padding on mobile
 - **WHEN** the viewport width is 600px or less
 - **THEN** `main` has `padding-bottom` of at least `60px`
+
+### Requirement: Touch targets meet minimum size
+All interactive elements (buttons, nav links, form controls) SHALL have a minimum touch target size of 44×44px on mobile viewports.
+
+#### Scenario: Button touch target on mobile
+- **WHEN** viewport is ≤768px
+- **THEN** all buttons have a minimum height and width of 44px
+
+### Requirement: Body text is readable on mobile
+The base font size SHALL be at least 16px on all viewports. Line height SHALL be at least 1.6 for body text.
+
+#### Scenario: Font size on mobile
+- **WHEN** any mobile viewport loads any page
+- **THEN** body text renders at ≥16px with line-height ≥1.6

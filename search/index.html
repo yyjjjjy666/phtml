@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>wheel — geller.ee</title>
+    <title>search — geller.ee</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -20,7 +20,7 @@
                 <li><a href="/wiki" class="non-active">wiki</a></li>
                 <li><a href="/gallery" class="non-active">gallery</a></li>
                 <li class="dropdown">
-                    <a href="/tools" class="active">tools</a>
+                    <a href="/tools" class="non-active">tools</a>
                     <ul class="dropdown-menu">
                         <li><a href="/tools/wheel">wheel</a></li>
                         <li><a href="/tools/password">password</a></li>
@@ -39,28 +39,14 @@
         </nav>
     </header>
     <main>
-        <div class="tool-panel">
-            <div class="tool-panel-header">fortune wheel</div>
-            <div id="wheel-page">
-                <canvas id="wheel-canvas" width="400" height="400"></canvas>
-                <div id="wheel-controls">
-                    <div id="item-input-row">
-                        <input id="item-input" type="text" placeholder="add item..." maxlength="40">
-                        <button id="add-btn">add</button>
-                    </div>
-                    <p id="wheel-msg"></p>
-                    <ul id="ul-items" id="item-list"></ul>
-                    <div id="spin-controls">
-                        <label for="duration-input">spin duration (seconds)</label>
-                        <input id="duration-input" type="number" min="1" max="60" value="5">
-                        <button id="spin-btn">spin</button>
-                    </div>
-                    <p id="result"></p>
-                </div>
+        <div id="search-page">
+            <div id="search-row">
+                <input id="search-q" type="text" placeholder="search..." autocomplete="off" spellcheck="false">
             </div>
+            <ul id="search-results"></ul>
         </div>
     </main>
-    <script src="/js/wheel.js"></script>
+    <script src="/js/search.js"></script>
     <script src="/js/theme.js"></script>
     <script src="/js/nav-scroll.js"></script>
     <script src="/js/command-palette.js"></script>

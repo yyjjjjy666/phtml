@@ -5,8 +5,15 @@
         return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
     }
 
+    var PRISM_DARK  = 'https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-one-dark.min.css';
+    var PRISM_LIGHT = 'https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-one-light.min.css';
+
     function applyTheme(theme) {
         document.documentElement.dataset.theme = theme;
+        var prismLink = document.getElementById('prism-theme');
+        if (prismLink) {
+            prismLink.href = theme === 'light' ? PRISM_LIGHT : PRISM_DARK;
+        }
     }
 
     applyTheme(getTheme());

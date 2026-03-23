@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>main page</title>
+    <title>geller.ee</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="manifest" href="/manifest.json">
     <script>(function(){var t=localStorage.getItem("theme");if(!t)t=window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";document.documentElement.dataset.theme=t;}());</script>
 </head>
 <body>
     <header>
         <nav class="navbar">
-            <ul>
-                <li id="nav-toggle-li"><button id="nav-toggle" aria-label="menu">&#9776;</button></li>
+            <a href="/" class="navbar-brand">geller.ee</a>
+            <ul class="navbar-links">
                 <li><a href="/" class="active">main page</a></li>
                 <li><a href="/wiki" class="non-active">wiki</a></li>
                 <li><a href="/gallery" class="non-active">gallery</a></li>
@@ -24,94 +28,116 @@
                     </ul>
                 </li>
                 <li><a href="/contact" class="non-active">contact</a></li>
-                <li id="theme-li"><span class="theme-lbl" id="lbl-dt">dt</span><button id="theme-btn" title="toggle theme"></button><span class="theme-lbl" id="lbl-lt">lt</span></li>
             </ul>
+            <div class="navbar-actions">
+                <button id="palette-btn" title="command palette (Ctrl+K)">&#8984;</button>
+                <span class="theme-lbl" id="lbl-dt">dt</span>
+                <button id="theme-btn" title="toggle theme"></button>
+                <span class="theme-lbl" id="lbl-lt">lt</span>
+                <button id="nav-toggle" aria-label="menu">&#9776;</button>
+            </div>
         </nav>
     </header>
     <main>
         <div id="dashboard">
 
-            <!-- clock / date -->
-            <div class="dash-widget" id="dash-widget-clock">
-                <div id="dash-time">00:00:00</div>
-                <div id="dash-dow-date"><span id="dash-dow"></span> &middot; <span id="dash-date"></span></div>
-            </div>
+            <div id="dash-zone-top">
 
-            <!-- weather -->
-            <div class="dash-widget" id="dash-widget-weather">
-                <div id="dash-weather">loading weather...</div>
-            </div>
+                <!-- clock / date -->
+                <div class="dash-widget" id="dash-widget-clock">
+                    <div id="dash-time">00:00:00</div>
+                    <div id="dash-dow-date"><span id="dash-dow"></span> &middot; <span id="dash-date"></span></div>
+                </div>
 
-            <!-- progress bars -->
-            <div class="dash-widget" id="dash-widget-progress">
-                <div class="dash-progress-row">
-                    <span class="dash-prog-label">day</span>
-                    <div class="dash-progress-track"><div class="dash-progress-bar" id="prog-day"></div></div>
-                    <span class="dash-prog-pct" id="pct-day">0%</span>
+                <!-- weather -->
+                <div class="dash-widget" id="dash-widget-weather">
+                    <div id="dash-weather">loading weather...</div>
                 </div>
-                <div class="dash-progress-row">
-                    <span class="dash-prog-label">week</span>
-                    <div class="dash-progress-track"><div class="dash-progress-bar" id="prog-week"></div></div>
-                    <span class="dash-prog-pct" id="pct-week">0%</span>
-                </div>
-                <div class="dash-progress-row">
-                    <span class="dash-prog-label">month</span>
-                    <div class="dash-progress-track"><div class="dash-progress-bar" id="prog-month"></div></div>
-                    <span class="dash-prog-pct" id="pct-month">0%</span>
-                </div>
-                <div class="dash-progress-row">
-                    <span class="dash-prog-label">year</span>
-                    <div class="dash-progress-track"><div class="dash-progress-bar" id="prog-year"></div></div>
-                    <span class="dash-prog-pct" id="pct-year">0%</span>
-                </div>
-            </div>
 
-            <!-- search -->
-            <div class="dash-widget" id="dash-widget-search">
-                <div id="dash-search-row">
-                    <select id="dash-engine">
-                        <option value="google">google</option>
-                        <option value="startpage">startpage</option>
-                        <option value="duckduckgo">duckduckgo</option>
-                    </select>
-                    <input id="dash-search" type="text" placeholder="search... (/ to focus)" autocomplete="off" spellcheck="false">
-                    <button id="dash-search-btn">go</button>
+                <!-- progress bars -->
+                <div class="dash-widget" id="dash-widget-progress">
+                    <div class="dash-progress-row">
+                        <span class="dash-prog-label">day</span>
+                        <div class="dash-progress-track"><div class="dash-progress-bar" id="prog-day"></div></div>
+                        <span class="dash-prog-pct" id="pct-day">0%</span>
+                    </div>
+                    <div class="dash-progress-row">
+                        <span class="dash-prog-label">week</span>
+                        <div class="dash-progress-track"><div class="dash-progress-bar" id="prog-week"></div></div>
+                        <span class="dash-prog-pct" id="pct-week">0%</span>
+                    </div>
+                    <div class="dash-progress-row">
+                        <span class="dash-prog-label">month</span>
+                        <div class="dash-progress-track"><div class="dash-progress-bar" id="prog-month"></div></div>
+                        <span class="dash-prog-pct" id="pct-month">0%</span>
+                    </div>
+                    <div class="dash-progress-row">
+                        <span class="dash-prog-label">year</span>
+                        <div class="dash-progress-track"><div class="dash-progress-bar" id="prog-year"></div></div>
+                        <span class="dash-prog-pct" id="pct-year">0%</span>
+                    </div>
                 </div>
-            </div>
 
-            <!-- tasks -->
-            <div class="dash-widget" id="dash-widget-tasks">
-                <h3 class="dash-section-title">tasks</h3>
-                <div id="dash-task-input-row">
-                    <input id="dash-task-input" type="text" placeholder="add task, enter to save..." autocomplete="off">
+            </div><!-- /dash-zone-top -->
+
+            <div id="dash-zone-main">
+
+                <!-- search -->
+                <div class="dash-widget" id="dash-widget-search">
+                    <div id="dash-search-row">
+                        <select id="dash-engine">
+                            <option value="google">google</option>
+                            <option value="startpage">startpage</option>
+                            <option value="duckduckgo">duckduckgo</option>
+                        </select>
+                        <input id="dash-search" type="text" placeholder="search... (/ to focus)" autocomplete="off" spellcheck="false">
+                        <button id="dash-search-btn">go</button>
+                    </div>
                 </div>
-                <ul id="dash-tasks"></ul>
-            </div>
 
-            <!-- quick links -->
-            <div class="dash-widget" id="dash-widget-links">
-                <h3 class="dash-section-title">links <button id="dash-link-add-btn" title="add link">+</button></h3>
-                <div id="dash-links"></div>
-                <div id="dash-link-form" class="hidden">
-                    <input id="dash-link-label" type="text" placeholder="label" maxlength="24" autocomplete="off">
-                    <input id="dash-link-url" type="text" placeholder="url" autocomplete="off">
-                    <button id="dash-link-save">add</button>
-                    <button id="dash-link-cancel">&#215;</button>
+                <div id="dash-zone-main-bottom">
+
+                    <!-- tasks -->
+                    <div class="dash-widget" id="dash-widget-tasks">
+                        <h3 class="dash-section-title">tasks</h3>
+                        <div id="dash-task-input-row">
+                            <input id="dash-task-input" type="text" placeholder="add task, enter to save..." autocomplete="off">
+                        </div>
+                        <ul id="dash-tasks"></ul>
+                    </div>
+
+                    <!-- quick links -->
+                    <div class="dash-widget" id="dash-widget-links">
+                        <h3 class="dash-section-title">links <button id="dash-link-add-btn" title="add link">+</button></h3>
+                        <div id="dash-links"></div>
+                        <div id="dash-link-form" class="hidden">
+                            <input id="dash-link-label" type="text" placeholder="label" maxlength="24" autocomplete="off">
+                            <input id="dash-link-url" type="text" placeholder="url" autocomplete="off">
+                            <button id="dash-link-save">add</button>
+                            <button id="dash-link-cancel">&#215;</button>
+                        </div>
+                    </div>
+
+                    <!-- intention -->
+                    <div class="dash-widget" id="dash-widget-intention">
+                        <h3 class="dash-section-title">today's focus</h3>
+                        <input id="dash-intention" type="text" placeholder="what matters most today?" autocomplete="off" spellcheck="false">
+                    </div>
+
+                </div><!-- /dash-zone-main-bottom -->
+
+            </div><!-- /dash-zone-main -->
+
+            <div id="dash-zone-bottom">
+
+                <!-- quote -->
+                <div class="dash-widget" id="dash-widget-quote">
+                    <blockquote id="dash-quote"></blockquote>
+                    <cite id="dash-quote-author"></cite>
+                    <button id="dash-quote-refresh" title="new quote">&#8635;</button>
                 </div>
-            </div>
 
-            <!-- intention -->
-            <div class="dash-widget" id="dash-widget-intention">
-                <h3 class="dash-section-title">today's focus</h3>
-                <input id="dash-intention" type="text" placeholder="what matters most today?" autocomplete="off" spellcheck="false">
-            </div>
-
-            <!-- quote -->
-            <div class="dash-widget" id="dash-widget-quote">
-                <blockquote id="dash-quote"></blockquote>
-                <cite id="dash-quote-author"></cite>
-                <button id="dash-quote-refresh" title="new quote">&#8635;</button>
-            </div>
+            </div><!-- /dash-zone-bottom -->
 
         </div>
         <!-- custom context menu -->
@@ -122,5 +148,7 @@
     <script src="/js/dashboard.js"></script>
     <script src="/js/theme.js"></script>
     <script src="/js/nav-scroll.js"></script>
+    <script src="/js/command-palette.js"></script>
+    <script>if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js');</script>
 </body>
 </html>

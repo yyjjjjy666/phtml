@@ -1,0 +1,6 @@
+[
+  {"slug": "linux", "title": "linux setup & configs", "category": "docs", "tags": ["linux", "arch", "config"]},
+  {"slug": "windows", "title": "windows setup & configs", "category": "docs", "tags": ["windows", "config"]},
+  {"slug": "network", "title": "network & selfhosting", "category": "docs", "tags": ["network", "pfsense", "cloudflare"]},
+  {"slug": "useful-links", "title": "useful links", "category": "links", "tags": ["tools", "software", "ai", "study"]}
+]

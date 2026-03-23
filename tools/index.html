@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tools</title>
+    <title>tools — geller.ee</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="manifest" href="/manifest.json">
     <script>(function(){var t=localStorage.getItem("theme");if(!t)t=window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";document.documentElement.dataset.theme=t;}());</script>
 </head>
 <body>
     <header>
         <nav class="navbar">
-            <ul>
-                <li id="nav-toggle-li"><button id="nav-toggle" aria-label="menu">&#9776;</button></li>
+            <a href="/" class="navbar-brand">geller.ee</a>
+            <ul class="navbar-links">
                 <li><a href="/" class="non-active">main page</a></li>
                 <li><a href="/wiki" class="non-active">wiki</a></li>
                 <li><a href="/gallery" class="non-active">gallery</a></li>
@@ -24,8 +28,14 @@
                     </ul>
                 </li>
                 <li><a href="/contact" class="non-active">contact</a></li>
-                <li id="theme-li"><span class="theme-lbl" id="lbl-dt">dt</span><button id="theme-btn" title="toggle theme"></button><span class="theme-lbl" id="lbl-lt">lt</span></li>
             </ul>
+            <div class="navbar-actions">
+                <button id="palette-btn" title="command palette (Ctrl+K)">&#8984;</button>
+                <span class="theme-lbl" id="lbl-dt">dt</span>
+                <button id="theme-btn" title="toggle theme"></button>
+                <span class="theme-lbl" id="lbl-lt">lt</span>
+                <button id="nav-toggle" aria-label="menu">&#9776;</button>
+            </div>
         </nav>
     </header>
     <main>
@@ -40,5 +50,7 @@
     </main>
     <script src="/js/theme.js"></script>
     <script src="/js/nav-scroll.js"></script>
+    <script src="/js/command-palette.js"></script>
+    <script>if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js');</script>
 </body>
 </html>
