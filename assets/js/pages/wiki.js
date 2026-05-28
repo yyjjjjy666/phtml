@@ -61,8 +61,7 @@
             el.addEventListener('click', function (e) {
                 e.preventDefault();
                 var slug = new URL(el.href).hash.slice(1);
-                history.pushState(null, '', '/wiki#' + slug);
-                renderArticle(slug, articles);
+                window.location.hash = slug;
             });
         });
     }
@@ -135,8 +134,7 @@
             el.addEventListener('click', function (e) {
                 e.preventDefault();
                 var slug = new URL(el.href).hash.slice(1);
-                history.pushState(null, '', '/wiki#' + slug);
-                renderArticle(slug, articles);
+                window.location.hash = slug;
             });
         });
 
