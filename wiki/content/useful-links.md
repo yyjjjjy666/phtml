@@ -17,7 +17,7 @@ tags: [tools, software, ai, study]
 
 ## documents
 
-- [docker guide](/files/Docker_Guide.pdf) — from jsmastery
+- [docker guide](/assets/files/Docker_Guide.pdf) — from jsmastery
 
 ## services & tools
 
