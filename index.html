@@ -14,115 +14,102 @@
 <body>
     <div id="navbar-container"></div>
     <main>
-        <div id="dashboard">
+        <div id="landing-hero">
+            <div id="hero-terminal">
+                <span id="hero-greeting">&gt; infrastructure._secured()</span><span id="hero-cursor">_</span>
+            </div>
+            <p id="hero-tagline">security &amp; infrastructure specialist &middot; automation &middot; estonia</p>
 
-            <div id="dash-zone-top">
-
-                <!-- clock / date -->
-                <div class="dash-widget" id="dash-widget-clock">
-                    <div id="dash-time">00:00:00</div>
-                    <div id="dash-dow-date"><span id="dash-dow"></span> &middot; <span id="dash-date"></span></div>
+            <div id="hero-status">
+                <div class="status-item">
+                    <span class="status-label">uptime</span>
+                    <span class="status-value">142d 7h</span>
                 </div>
-
-                <!-- weather -->
-                <div class="dash-widget" id="dash-widget-weather">
-                    <div id="dash-weather">loading weather...</div>
+                <div class="status-item">
+                    <span class="status-label">location</span>
+                    <span class="status-value">ee</span>
                 </div>
-
-                <!-- progress bars -->
-                <div class="dash-widget" id="dash-widget-progress">
-                    <div class="dash-progress-row">
-                        <span class="dash-prog-label">day</span>
-                        <div class="dash-progress-track"><div class="dash-progress-bar" id="prog-day"></div></div>
-                        <span class="dash-prog-pct" id="pct-day">0%</span>
-                    </div>
-                    <div class="dash-progress-row">
-                        <span class="dash-prog-label">week</span>
-                        <div class="dash-progress-track"><div class="dash-progress-bar" id="prog-week"></div></div>
-                        <span class="dash-prog-pct" id="pct-week">0%</span>
-                    </div>
-                    <div class="dash-progress-row">
-                        <span class="dash-prog-label">month</span>
-                        <div class="dash-progress-track"><div class="dash-progress-bar" id="prog-month"></div></div>
-                        <span class="dash-prog-pct" id="pct-month">0%</span>
-                    </div>
-                    <div class="dash-progress-row">
-                        <span class="dash-prog-label">year</span>
-                        <div class="dash-progress-track"><div class="dash-progress-bar" id="prog-year"></div></div>
-                        <span class="dash-prog-pct" id="pct-year">0%</span>
-                    </div>
+                <div class="status-item">
+                    <span class="status-label">focus</span>
+                    <span class="status-value">automation &amp; security</span>
                 </div>
-
-            </div><!-- /dash-zone-top -->
-
-            <div id="dash-zone-main">
-
-                <!-- search -->
-                <div class="dash-widget" id="dash-widget-search">
-                    <div id="dash-search-row">
-                        <select id="dash-engine">
-                            <option value="google">google</option>
-                            <option value="startpage">startpage</option>
-                            <option value="duckduckgo">duckduckgo</option>
-                        </select>
-                        <input id="dash-search" type="text" placeholder="search... (/ to focus)" autocomplete="off" spellcheck="false">
-                        <button id="dash-search-btn">go</button>
-                    </div>
+                <div class="status-item">
+                    <span class="status-label">status</span>
+                    <span class="status-value status-online">online</span>
                 </div>
-
-                <div id="dash-zone-main-bottom">
-
-                    <!-- tasks -->
-                    <div class="dash-widget" id="dash-widget-tasks">
-                        <h3 class="dash-section-title">tasks</h3>
-                        <div id="dash-task-input-row">
-                            <input id="dash-task-input" type="text" placeholder="add task, enter to save..." autocomplete="off">
-                        </div>
-                        <ul id="dash-tasks"></ul>
-                    </div>
-
-                    <!-- quick links -->
-                    <div class="dash-widget" id="dash-widget-links">
-                        <h3 class="dash-section-title">links <button id="dash-link-add-btn" title="add link">+</button></h3>
-                        <div id="dash-links"></div>
-                        <div id="dash-link-form" class="hidden">
-                            <input id="dash-link-label" type="text" placeholder="label" maxlength="24" autocomplete="off">
-                            <input id="dash-link-url" type="text" placeholder="url" autocomplete="off">
-                            <button id="dash-link-save">add</button>
-                            <button id="dash-link-cancel">&#215;</button>
-                        </div>
-                    </div>
-
-                    <!-- intention -->
-                    <div class="dash-widget" id="dash-widget-intention">
-                        <h3 class="dash-section-title">today's focus</h3>
-                        <input id="dash-intention" type="text" placeholder="what matters most today?" autocomplete="off" spellcheck="false">
-                    </div>
-
-                </div><!-- /dash-zone-main-bottom -->
-
-            </div><!-- /dash-zone-main -->
-
-            <div id="dash-zone-bottom">
-
-                <!-- quote -->
-                <div class="dash-widget" id="dash-widget-quote">
-                    <blockquote id="dash-quote"></blockquote>
-                    <cite id="dash-quote-author"></cite>
-                    <button id="dash-quote-refresh" title="new quote">&#8635;</button>
-                </div>
-
-            </div><!-- /dash-zone-bottom -->
-
+            </div>
         </div>
-        <!-- custom context menu -->
-        <div id="dash-ctx-menu" class="hidden">
-            <button id="dash-ctx-remove">remove</button>
-        </div>
+
+        <section id="landing-projects">
+            <h2 class="landing-section-title">projects</h2>
+            <div id="project-grid">
+
+                <a class="project-card" href="https://github.com/yyjjjjy666" target="_blank" rel="noopener noreferrer">
+                    <div class="project-card-title">ai-agent-bot</div>
+                    <p class="project-card-desc">telegram claude code executor for automated task management</p>
+                    <div class="project-tags">
+                        <span class="project-tag">python</span>
+                        <span class="project-tag">claude</span>
+                        <span class="project-tag">telegram</span>
+                        <span class="project-tag">automation</span>
+                    </div>
+                </a>
+
+                <a class="project-card" href="https://github.com/yyjjjjy666" target="_blank" rel="noopener noreferrer">
+                    <div class="project-card-title">finwise</div>
+                    <p class="project-card-desc">ai-powered personal finance manager with bank integration</p>
+                    <div class="project-tags">
+                        <span class="project-tag">python</span>
+                        <span class="project-tag">ai</span>
+                        <span class="project-tag">n8n</span>
+                        <span class="project-tag">finance</span>
+                    </div>
+                </a>
+
+                <a class="project-card" href="https://github.com/yyjjjjy666" target="_blank" rel="noopener noreferrer">
+                    <div class="project-card-title">ploopy</div>
+                    <p class="project-card-desc">markov chain telegram bot with premium subscription model</p>
+                    <div class="project-tags">
+                        <span class="project-tag">python</span>
+                        <span class="project-tag">telegram</span>
+                        <span class="project-tag">markov chain</span>
+                    </div>
+                </a>
+
+                <a class="project-card" href="https://github.com/yyjjjjy666/phtml" target="_blank" rel="noopener noreferrer">
+                    <div class="project-card-title">phtml</div>
+                    <p class="project-card-desc">personal site (this one) — static html/css/js on github pages</p>
+                    <div class="project-tags">
+                        <span class="project-tag">html</span>
+                        <span class="project-tag">css</span>
+                        <span class="project-tag">js</span>
+                        <span class="project-tag">github pages</span>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <section id="landing-tools">
+            <h2 class="landing-section-title">tools</h2>
+            <div id="tools-row">
+                <a class="tool-card" href="/tools/wheel">
+                    <span class="tool-card-icon">🎯</span>
+                    <span class="tool-card-name">fortune wheel</span>
+                </a>
+                <a class="tool-card" href="/tools/password">
+                    <span class="tool-card-icon">🔑</span>
+                    <span class="tool-card-name">password gen</span>
+                </a>
+                <a class="tool-card" href="/tools/ip">
+                    <span class="tool-card-icon">🌐</span>
+                    <span class="tool-card-name">ip lookup</span>
+                </a>
+            </div>
+        </section>
     </main>
     <button id="scroll-top-btn" aria-label="Scroll to top">↑</button>
     <script src="/assets/js/lib/navbar-loader.js"></script>
-    <script src="/assets/js/pages/dashboard.js"></script>
     <script src="/assets/js/lib/theme.js"></script>
     <script src="/assets/js/lib/nav-scroll.js"></script>
     <script src="/assets/js/lib/command-palette.js"></script>
