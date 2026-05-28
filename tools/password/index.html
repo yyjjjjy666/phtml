@@ -7,37 +7,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
     <link rel="manifest" href="/manifest.json">
     <script>(function(){var t=localStorage.getItem("theme");if(!t)t=window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";document.documentElement.dataset.theme=t;}());</script>
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <a href="/" class="navbar-brand">geller.ee</a>
-            <ul class="navbar-links">
-                <li><a href="/" class="non-active">main page</a></li>
-                <li><a href="/wiki" class="non-active">wiki</a></li>
-                <li><a href="/gallery" class="non-active">gallery</a></li>
-                <li class="dropdown">
-                    <a href="/tools" class="active">tools</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/tools/wheel">wheel</a></li>
-                        <li><a href="/tools/password">password</a></li>
-                        <li><a href="/tools/ip">ip</a></li>
-                    </ul>
-                </li>
-                <li><a href="/contact" class="non-active">contact</a></li>
-            </ul>
-            <div class="navbar-actions">
-                <button id="palette-btn" title="command palette (Ctrl+K)">&#8984;</button>
-                <span class="theme-lbl" id="lbl-dt">dt</span>
-                <button id="theme-btn" title="toggle theme"></button>
-                <span class="theme-lbl" id="lbl-lt">lt</span>
-                <button id="nav-toggle" aria-label="menu">&#9776;</button>
-            </div>
-        </nav>
-    </header>
+    <div id="navbar-container"></div>
     <main>
         <div class="tool-panel">
         <div class="tool-panel-header">password generator</div>
@@ -175,10 +150,14 @@
         </div>
         </div>
     </main>
-    <script src="/js/password.js"></script>
-    <script src="/js/theme.js"></script>
-    <script src="/js/nav-scroll.js"></script>
-    <script src="/js/command-palette.js"></script>
+    <button id="scroll-top-btn" aria-label="Scroll to top">↑</button>
+    <script src="/assets/js/pages/password.js"></script>
+    <script src="/assets/js/lib/navbar-loader.js"></script>
+    <script src="/assets/js/lib/theme.js"></script>
+    <script src="/assets/js/lib/nav-scroll.js"></script>
+    <script src="/assets/js/lib/command-palette.js"></script>
+    <script src="/assets/js/lib/scroll-top.js"></script>
+    <script src="/assets/js/lib/keyboard-nav.js"></script>
     <script>if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js');</script>
 </body>
 </html>

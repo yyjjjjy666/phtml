@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>geller.ee wiki</title>
+    <link>https://geller.ee/wiki</link>
+    <description>personal wiki — docs, links, configs</description>
+    <language>en</language>
+    <atom:link href="https://geller.ee/wiki/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <item>
+      <title>linux setup &amp; configs</title>
+      <link>https://geller.ee/wiki#linux</link>
+      <guid isPermaLink="false">geller.ee/wiki/linux</guid>
+      <description>arch linux setup, configuration files, and tips.</description>
+      <pubDate>Wed, 28 May 2026 00:00:00 +0000</pubDate>
+    </item>
+
+    <item>
+      <title>network &amp; selfhosting</title>
+      <link>https://geller.ee/wiki#network</link>
+      <guid isPermaLink="false">geller.ee/wiki/network</guid>
+      <description>pfsense, cloudflare, networking guides and selfhosting notes.</description>
+      <pubDate>Wed, 28 May 2026 00:00:00 +0000</pubDate>
+    </item>
+
+    <item>
+      <title>windows setup &amp; configs</title>
+      <link>https://geller.ee/wiki#windows</link>
+      <guid isPermaLink="false">geller.ee/wiki/windows</guid>
+      <description>windows configuration, tweaks, and setup notes.</description>
+      <pubDate>Wed, 28 May 2026 00:00:00 +0000</pubDate>
+    </item>
+
+    <item>
+      <title>useful links</title>
+      <link>https://geller.ee/wiki#useful-links</link>
+      <guid isPermaLink="false">geller.ee/wiki/useful-links</guid>
+      <description>curated links — tools, software, ai, study resources.</description>
+      <pubDate>Wed, 28 May 2026 00:00:00 +0000</pubDate>
+    </item>
+
+  </channel>
+</rss>

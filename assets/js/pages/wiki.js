@@ -29,6 +29,12 @@
         return '<a class="wiki-tag" href="/wiki?tag=' + encodeURIComponent(tag) + '">' + tag + '</a>';
     }
 
+    function readingTime(text) {
+        var words = text.trim().split(/\s+/).filter(Boolean).length;
+        var mins = Math.ceil(words / 200);
+        return mins < 1 ? '< 1 min read' : '~' + mins + ' min read';
+    }
+
     function renderArticle(slug, articles) {
         fetch('/wiki/content/' + slug + '.md')
             .then(function (r) { return r.ok ? r.text() : Promise.reject(r.status); })
@@ -38,8 +44,10 @@
                 var tags = parsed.meta.tags.length
                     ? '<div class="wiki-tags">' + parsed.meta.tags.map(tagLink).join('') + '</div>'
                     : '';
+                var rt = '<span class="wiki-reading-time">' + readingTime(parsed.body) + '</span>';
                 var html = backLink
                     + '<h1 class="wiki-article-title">' + (parsed.meta.title || slug) + '</h1>'
+                    + rt
                     + tags
                     + '<div class="wiki-body">' + (typeof marked !== 'undefined' ? marked.parse(parsed.body) : '<pre>' + parsed.body + '</pre>') + '</div>';
                 container.innerHTML = html;

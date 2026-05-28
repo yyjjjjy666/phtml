@@ -7,63 +7,73 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
     <link rel="manifest" href="/manifest.json">
     <script>(function(){var t=localStorage.getItem("theme");if(!t)t=window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";document.documentElement.dataset.theme=t;}());</script>
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <a href="/" class="navbar-brand">geller.ee</a>
-            <ul class="navbar-links">
-                <li><a href="/" class="non-active">main page</a></li>
-                <li><a href="/wiki" class="non-active">wiki</a></li>
-                <li><a href="/gallery" class="non-active">gallery</a></li>
-                <li class="dropdown">
-                    <a href="/tools" class="active">tools</a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/tools/wheel">wheel</a></li>
-                        <li><a href="/tools/password">password</a></li>
-                        <li><a href="/tools/ip">ip</a></li>
-                    </ul>
-                </li>
-                <li><a href="/contact" class="non-active">contact</a></li>
-            </ul>
-            <div class="navbar-actions">
-                <button id="palette-btn" title="command palette (Ctrl+K)">&#8984;</button>
-                <span class="theme-lbl" id="lbl-dt">dt</span>
-                <button id="theme-btn" title="toggle theme"></button>
-                <span class="theme-lbl" id="lbl-lt">lt</span>
-                <button id="nav-toggle" aria-label="menu">&#9776;</button>
-            </div>
-        </nav>
-    </header>
+    <div id="navbar-container"></div>
     <main>
         <div class="tool-panel">
             <div class="tool-panel-header">fortune wheel</div>
             <div id="wheel-page">
-                <canvas id="wheel-canvas" width="400" height="400"></canvas>
+                <div id="wheel-container">
+                    <canvas id="wheel-canvas" width="400" height="400"></canvas>
+                </div>
                 <div id="wheel-controls">
-                    <div id="item-input-row">
-                        <input id="item-input" type="text" placeholder="add item..." maxlength="40">
-                        <button id="add-btn">add</button>
+                    <div id="item-input-section">
+                        <div id="item-input-row">
+                            <input id="item-input" type="text" placeholder="add item..." maxlength="40">
+                            <input id="weight-input" type="number" min="1" max="99" value="1" title="weight (1-99)">
+                            <button id="add-btn">add</button>
+                        </div>
+                        <p id="wheel-msg"></p>
                     </div>
-                    <p id="wheel-msg"></p>
-                    <ul id="ul-items" id="item-list"></ul>
-                    <div id="spin-controls">
-                        <label for="duration-input">spin duration (seconds)</label>
-                        <input id="duration-input" type="number" min="1" max="60" value="5">
-                        <button id="spin-btn">spin</button>
+
+                    <div id="item-list-section">
+                        <div id="list-header">
+                            <h3>Items (<span id="item-count">0</span>/30)</h3>
+                            <div id="list-controls">
+                                <select id="preset-select">
+                                    <option value="">Load Preset...</option>
+                                    <option value="yes-no">Yes / No</option>
+                                    <option value="truth-dare">Truth or Dare</option>
+                                    <option value="eat">What to eat?</option>
+                                    <option value="movie">Movie night</option>
+                                </select>
+                                <button id="clear-btn">Clear All</button>
+                            </div>
+                        </div>
+                        <ul id="item-list"></ul>
                     </div>
-                    <p id="result"></p>
+
+                    <div id="spin-section">
+                        <div id="spin-controls">
+                            <div id="duration-control">
+                                <label for="duration-input">Duration: <span id="duration-display">5</span>s</label>
+                                <input id="duration-input" type="range" min="1" max="60" value="5">
+                            </div>
+                            <div id="spin-buttons">
+                                <button id="spin-btn" class="spin-button">🎯 Spin!</button>
+                                <button id="sound-toggle" class="sound-toggle" title="Toggle sound">🔊</button>
+                            </div>
+                        </div>
+                        <div id="result-section">
+                            <p id="result"></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
-    <script src="/js/wheel.js"></script>
-    <script src="/js/theme.js"></script>
-    <script src="/js/nav-scroll.js"></script>
-    <script src="/js/command-palette.js"></script>
+    <button id="scroll-top-btn" aria-label="Scroll to top">↑</button>
+    <script src="/assets/js/lib/navbar-loader.js"></script>
+    <script src="/assets/js/pages/wheel.js"></script>
+    <script src="/assets/js/lib/theme.js"></script>
+    <script src="/assets/js/lib/nav-scroll.js"></script>
+    <script src="/assets/js/lib/command-palette.js"></script>
+    <script src="/assets/js/lib/scroll-top.js"></script>
+    <script src="/assets/js/lib/keyboard-nav.js"></script>
     <script>if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js');</script>
 </body>
 </html>
