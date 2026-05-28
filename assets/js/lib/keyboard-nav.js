@@ -9,11 +9,12 @@
     document.addEventListener('keydown', function (e) {
         var tag = document.activeElement && document.activeElement.tagName;
         if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
-        if (e.ctrlKey || e.metaKey || e.altKey) return;
+        // Require Alt+number to avoid conflicts (wiki, browser, etc.)
+        if (!e.altKey || e.ctrlKey || e.metaKey) return;
         var url = NAV_KEYS[e.key];
         if (url) {
             e.preventDefault();
             window.location.href = url;
         }
     });
-}());
+})();

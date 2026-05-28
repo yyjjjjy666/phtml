@@ -1,4 +1,4 @@
-(function() {
+(function(global) {
     function getTheme() {
         var saved = localStorage.getItem('theme');
         if (saved === 'light' || saved === 'dark') return saved;
@@ -16,18 +16,21 @@
         }
     }
 
-    applyTheme(getTheme());
-
-    document.addEventListener('DOMContentLoaded', function() {
+    function initializeTheme() {
         var btn = document.getElementById('theme-btn');
         if (!btn) return;
-        btn.addEventListener('click', function() {
+        // Remove old listener by cloning
+        var newBtn = btn.cloneNode(true);
+        btn.parentNode.replaceChild(newBtn, btn);
+        newBtn.addEventListener('click', function() {
             var next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
             localStorage.setItem('theme', next);
             applyTheme(next);
             // redraw wheel if on wheel page
-            if (typeof drawWheel === 'function') drawWheel(typeof currentRotation !== 'undefined' ? currentRotation : 0);
-            // refresh password meter colors if on password page
+            if (typeof drawWheel === 'function' && typeof currentRotation !== 'undefined') {
+                drawWheel(currentRotation);
+            }
+            // refresh password meter if on password page
             var pw = document.getElementById('pw-result');
             if (pw && pw.value && typeof showPassword === 'function') {
                 var bits = parseFloat(document.getElementById('pw-entropy-label').textContent) || 0;
@@ -37,12 +40,29 @@
                     if (bar && lbl) {
                         var color = document.documentElement.dataset.theme === 'light'
                             ? (bits < 40 ? '#e07070' : bits < 60 ? '#e0a040' : bits < 80 ? '#059669' : '#7c3aed')
-                            : (bits < 40 ? '#e07070' : bits < 60 ? '#e0a040' : bits < 80 ? '#80c070' : '#e0ff03');
+                            : (bits < 40 ? '#e07070' : bits < 60 ? '#e0a040' : bits < 80 ? '#80c070' : '#00ff88');
                         bar.style.backgroundColor = color;
                         lbl.style.color = color;
                     }
                 }
             }
         });
-    });
-})();
+    }
+
+    applyTheme(getTheme());
+
+    // Try binding immediately (navbar may already be loaded)
+    if (document.getElementById('theme-btn')) {
+        initializeTheme();
+    } else {
+        // Wait for DOM then try again (navbar loads async)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Give navbar-loader a chance to inject first
+            setTimeout(initializeTheme, 100);
+        });
+    }
+
+    // Expose for navbar-loader to call after dynamic injection
+    global.initializeTheme = initializeTheme;
+    global.applyTheme = applyTheme;
+})(window);

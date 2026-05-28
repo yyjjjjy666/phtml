@@ -100,7 +100,7 @@ function strengthColor(bits) {
     if (bits < 40)  return '#e07070';
     if (bits < 60)  return '#e0a040';
     if (bits < 80)  return light ? '#059669' : '#80c070';
-    return light ? '#7c3aed' : '#e0ff03';
+    return light ? '#7c3aed' : '#00ff88';
 }
 
 function strengthPct(bits) {

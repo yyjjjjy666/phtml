@@ -1,6 +1,7 @@
 (function () {
     var INDEX_URL = '/wiki/content/index.json';
     var container = document.getElementById('wiki-content');
+    var sidebar = document.getElementById('wiki-sidebar');
 
     function parseFrontmatter(text) {
         var meta = { title: '', category: '', tags: [] };
@@ -35,6 +36,37 @@
         return mins < 1 ? '< 1 min read' : '~' + mins + ' min read';
     }
 
+    function renderSidebar(articles, activeSlug) {
+        if (!sidebar) return;
+        var groups = {};
+        articles.forEach(function (a) {
+            if (!groups[a.category]) groups[a.category] = [];
+            groups[a.category].push(a);
+        });
+        var html = '';
+        Object.keys(groups).sort().forEach(function (cat) {
+            html += '<div class="wiki-sidebar-cat">';
+            html += '<div class="wiki-sidebar-cat-heading">' + cat + '</div>';
+            html += '<ul class="wiki-sidebar-list">';
+            groups[cat].forEach(function (a) {
+                var isActive = a.slug === activeSlug;
+                html += '<li class="wiki-sidebar-item">';
+                html += '<a class="wiki-sidebar-link' + (isActive ? ' active' : '') + '" href="/wiki#' + a.slug + '">' + a.title + '</a>';
+                html += '</li>';
+            });
+            html += '</ul></div>';
+        });
+        sidebar.innerHTML = html;
+        sidebar.querySelectorAll('.wiki-sidebar-link').forEach(function (el) {
+            el.addEventListener('click', function (e) {
+                e.preventDefault();
+                var slug = new URL(el.href).hash.slice(1);
+                history.pushState(null, '', '/wiki#' + slug);
+                renderArticle(slug, articles);
+            });
+        });
+    }
+
     function renderArticle(slug, articles) {
         fetch('/wiki/content/' + slug + '.md')
             .then(function (r) { return r.ok ? r.text() : Promise.reject(r.status); })
@@ -51,6 +83,7 @@
                     + tags
                     + '<div class="wiki-body">' + (typeof marked !== 'undefined' ? marked.parse(parsed.body) : '<pre>' + parsed.body + '</pre>') + '</div>';
                 container.innerHTML = html;
+                renderSidebar(articles, slug);
                 if (typeof highlightWiki === 'function') highlightWiki(container);
                 // wire tag clicks
                 container.querySelectorAll('.wiki-tag').forEach(function (el) {
@@ -95,6 +128,7 @@
         });
         if (!html) html = '<p>no articles found.</p>';
         container.innerHTML = html;
+        renderSidebar(articles, null);
 
         // wire article links (hash nav)
         container.querySelectorAll('.wiki-article-link').forEach(function (el) {

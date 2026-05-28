@@ -4,8 +4,8 @@
   "description": "Personal developer platform — wiki, tools, dashboard",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#2C2C2C",
-  "theme_color": "#2C2C2C",
+  "background_color": "#08090a",
+  "theme_color": "#08090a",
   "icons": [
     {
       "src": "/images/icon-192.png",

@@ -277,7 +277,7 @@ class FortuneWheel {
         // Draw center circle
         ctx.beginPath();
         ctx.arc(cx, cy, 12, 0, Math.PI * 2);
-        ctx.fillStyle = document.documentElement.dataset.theme === 'light' ? '#333' : '#e0ff03';
+        ctx.fillStyle = document.documentElement.dataset.theme === 'light' ? '#333' : '#00d4ff';
         ctx.fill();
 
         // Draw center dot
@@ -296,7 +296,7 @@ class FortuneWheel {
 
         ctx.beginPath();
         ctx.arc(cx, cy, r, 0, Math.PI * 2);
-        ctx.fillStyle = isLight ? '#f0edf8' : '#383838';
+        ctx.fillStyle = isLight ? '#f0edf8' : '#191a1b';
         ctx.fill();
 
         ctx.strokeStyle = isLight ? '#333' : '#fff';
@@ -338,7 +338,7 @@ class FortuneWheel {
         ctx.moveTo(cx, cy);
         ctx.arc(cx, cy, r, startAngle, endAngle);
         ctx.closePath();
-        ctx.strokeStyle = document.documentElement.dataset.theme === 'light' ? '#fff' : '#2C2C2C';
+        ctx.strokeStyle = document.documentElement.dataset.theme === 'light' ? '#fff' : '#08090a';
         ctx.lineWidth = 2;
         ctx.stroke();
 
@@ -373,8 +373,8 @@ class FortuneWheel {
         const py = cy - r - 5;
 
         ctx.save();
-        ctx.fillStyle = document.documentElement.dataset.theme === 'light' ? '#7c3aed' : '#e0ff03';
-        ctx.strokeStyle = document.documentElement.dataset.theme === 'light' ? '#5b21b6' : '#c4d605';
+        ctx.fillStyle = document.documentElement.dataset.theme === 'light' ? '#7c3aed' : '#00d4ff';
+        ctx.strokeStyle = document.documentElement.dataset.theme === 'light' ? '#5b21b6' : '#0099bb';
         ctx.lineWidth = 2;
 
         // Draw chevron pointer
