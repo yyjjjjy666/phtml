@@ -1,6 +1,11 @@
 [
   {"slug": "linux", "title": "linux setup & configs", "category": "docs", "tags": ["linux", "arch", "config"]},
+  {"slug": "arch-install", "title": "arch linux installation guide", "category": "docs", "tags": ["linux", "arch", "install"]},
+  {"slug": "synaptics-scroll", "title": "synaptics touchpad scroll config", "category": "docs", "tags": ["linux", "arch", "config", "touchpad"]},
   {"slug": "windows", "title": "windows setup & configs", "category": "docs", "tags": ["windows", "config"]},
+  {"slug": "windows-activation", "title": "windows activation script", "category": "docs", "tags": ["windows", "config", "activation"]},
   {"slug": "network", "title": "network & selfhosting", "category": "docs", "tags": ["network", "pfsense", "cloudflare"]},
+  {"slug": "cloudflare-pfsense", "title": "cloudflare tunnel on pfsense", "category": "docs", "tags": ["network", "pfsense", "cloudflare", "tunnel"]},
+  {"slug": "pfsense-ok-stuck", "title": "pfsense \"OK\" stuck in console fix", "category": "docs", "tags": ["network", "pfsense", "console", "fix"]},
   {"slug": "useful-links", "title": "useful links", "category": "links", "tags": ["tools", "software", "ai", "study"]}
 ]
