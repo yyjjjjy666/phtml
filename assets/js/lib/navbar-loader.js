@@ -5,7 +5,7 @@
         .then(html => {
             // Determine current page from window.location.pathname
             const path = window.location.pathname;
-            let activePage = 'main'; // default
+            let activePage = ''; // no match (e.g. 404) → nothing highlighted
 
             // Map paths to page identifiers
             if (path === '/' || path === '/index.html') {

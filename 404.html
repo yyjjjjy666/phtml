@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — geller.ee</title>
+    <meta name="robots" content="noindex">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="manifest" href="/manifest.json">
+    <script>(function(){var t=localStorage.getItem("theme");if(!t)t=window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";document.documentElement.dataset.theme=t;}());</script>
+    <style>
+        #err-wrap { max-width: 640px; margin: var(--sp-8) auto; }
+        #err-code {
+            font-family: var(--font-mono);
+            font-size: clamp(3.5rem, 14vw, 6rem);
+            line-height: 1;
+            color: var(--color-accent);
+            margin-bottom: var(--sp-2);
+        }
+        #err-terminal {
+            font-family: var(--font-mono);
+            font-size: 0.9375rem;
+            color: var(--color-text-muted);
+            word-break: break-all;
+            margin-bottom: var(--sp-5);
+        }
+        #err-path { color: var(--color-text); }
+        #err-actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-bottom: var(--sp-6); }
+        #err-hint { color: var(--color-text-faint); font-size: 0.875rem; margin-top: var(--sp-5); }
+    </style>
+</head>
+<body>
+    <div id="navbar-container"></div>
+    <main>
+        <div id="err-wrap">
+            <h1 id="err-code">404</h1>
+            <div id="err-terminal">
+                <span>&gt; GET </span><span id="err-path">this page</span><br>
+                <span>&gt; page not found</span>
+            </div>
+
+            <div id="err-actions">
+                <a href="/" class="btn btn-primary">main page</a>
+                <a href="/search" class="btn btn-ghost">search the site</a>
+            </div>
+
+            <p class="landing-section-title">or jump to</p>
+            <div class="links">
+                <ul>
+                    <li><a href="/wiki">wiki</a> — linux, windows &amp; networking notes</li>
+                    <li><a href="/tools">tools</a> — wheel, password generator, ip lookup</li>
+                    <li><a href="/gallery">gallery</a> — photos</li>
+                    <li><a href="/contact">contact</a> — get in touch</li>
+                </ul>
+            </div>
+
+            <p id="err-hint">tip: press <code>Ctrl</code> + <code>K</code> to open the command palette.</p>
+        </div>
+    </main>
+    <button id="scroll-top-btn" aria-label="Scroll to top">↑</button>
+    <script>
+        (function () {
+            // textContent, not innerHTML — the requested path is attacker-controlled.
+            document.getElementById('err-path').textContent =
+                window.location.pathname + window.location.search;
+        }());
+    </script>
+    <script src="/assets/js/lib/navbar-loader.js"></script>
+    <script src="/assets/js/lib/theme.js"></script>
+    <script src="/assets/js/lib/nav-scroll.js"></script>
+    <script src="/assets/js/lib/command-palette.js"></script>
+    <script src="/assets/js/lib/scroll-top.js"></script>
+    <script src="/assets/js/lib/keyboard-nav.js"></script>
+    <script>if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js');</script>
+</body>
+</html>

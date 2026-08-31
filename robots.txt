@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Repo tooling served by Pages but not site content
+Disallow: /openspec/
+Disallow: /.claude/
+Disallow: /.github/
+Disallow: /.kilocode/
+Disallow: /.hermes/
+Disallow: /CLAUDE.md
+
+Sitemap: https://geller.ee/sitemap.xml

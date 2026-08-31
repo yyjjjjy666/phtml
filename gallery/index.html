@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>gallery — geller.ee</title>
+    <meta name="description" content="A photo gallery on geller.ee, with a click-to-open lightbox viewer.">
+    <link rel="canonical" href="https://geller.ee/gallery/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -14,20 +16,21 @@
 <body>
     <div id="navbar-container"></div>
     <main>
-        <!-- To add images: copy a .gallery-item block and set the src to /images/yourfile.jpg -->
+        <!-- To add images: copy a .gallery-item block, set the src to /assets/images/yourfile.jpg,
+             and write an alt that describes what is in the photo (the lightbox reuses it) -->
         <!-- To add a new category: copy a <section> block and change the <h2> heading -->
         <section>
             <h2>uncategorized</h2>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="/assets/images/example.jpg" alt="example" onclick="openLightbox(this.src)">
+                    <img src="/assets/images/example.jpg" alt="Placeholder gallery image" onclick="openLightbox(this)">
                 </div>
             </div>
         </section>
     </main>
 
     <div id="lightbox">
-        <img id="lightbox-img" src="" alt="full size">
+        <img id="lightbox-img" src="" alt="">
     </div>
 
     <button id="scroll-top-btn" aria-label="Scroll to top">↑</button>
