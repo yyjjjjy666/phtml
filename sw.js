@@ -1,27 +1,32 @@
-const CACHE = 'geller-v1';
+const CACHE = 'geller-v2';
 
 const SHELL = [
   '/',
-  '/wiki',
-  '/gallery',
-  '/contact',
-  '/tools',
-  '/tools/wheel',
-  '/tools/password',
-  '/tools/ip',
-  '/search',
-  '/css/styles.css',
-  '/js/theme.js',
-  '/js/nav-scroll.js',
-  '/js/dashboard.js',
-  '/js/command-palette.js',
-  '/js/wiki.js',
-  '/js/search.js',
+  '/wiki/',
+  '/gallery/',
+  '/tools/',
+  '/tools/wheel/',
+  '/tools/password/',
+  '/tools/ip/',
+  '/search/',
+  '/contact/',
+  '/assets/css/styles.css',
+  '/assets/js/lib/navbar-loader.js',
+  '/assets/js/lib/theme.js',
+  '/assets/js/lib/nav-scroll.js',
+  '/assets/js/lib/command-palette.js',
+  '/assets/js/lib/scroll-top.js',
+  '/assets/js/lib/keyboard-nav.js',
+  '/shared/navbar.html',
+  '/manifest.json',
 ];
 
 self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())
+    caches.open(CACHE)
+      // один отсутствующий файл не должен ломать установку service worker
+      .then(c => Promise.all(SHELL.map(p => c.add(p).catch(() => null))))
+      .then(() => self.skipWaiting())
   );
 });
 
